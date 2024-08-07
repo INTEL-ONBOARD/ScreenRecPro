@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using System;
 using System.Windows;
 
 namespace ScreenRecPro
@@ -8,7 +9,7 @@ namespace ScreenRecPro
     /// </summary>
     public partial class App : Application
     {
-        private Hardcodet.Wpf.TaskbarNotification.TaskbarIcon _taskbarIcon;
+        private TaskbarIcon _taskbarIcon;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -18,9 +19,11 @@ namespace ScreenRecPro
 
         private void InitializeTrayIcon()
         {
-            _taskbarIcon = new Hardcodet.Wpf.TaskbarNotification.TaskbarIcon
+            string iconPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "view", "cancel.ico");
+
+            _taskbarIcon = new TaskbarIcon
             {
-                Icon = new System.Drawing.Icon("pack://application:,,,/ScreenRecPro;view/cancel.ico"), // Set your icon path
+                Icon = new System.Drawing.Icon(iconPath), 
                 ToolTipText = "Your Application Name"
             };
 
@@ -29,13 +32,11 @@ namespace ScreenRecPro
 
         private void TaskbarIcon_Click(object sender, RoutedEventArgs e)
         {
-            // Handle double-click on the tray icon (e.g., show main window)
             ShowMainWindow();
         }
 
         private void ShowMainWindow()
         {
-            // Show your main window
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
         }
