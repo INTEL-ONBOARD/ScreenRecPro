@@ -1,0 +1,292 @@
+﻿<Window x:Class="ScreenRecPro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScreenRecPro"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="850" Width="1400"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True">
+
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Background="White" CornerRadius="10">
+                <ContentPresenter/>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+
+
+
+    <Window.Resources>
+        <CornerRadius x:Key="LoginPaneCornerRadius">15</CornerRadius>
+
+        <Style TargetType="{x:Type Button}" x:Key="MyButton">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <Style TargetType="{x:Type Button}" x:Key="btncutsomstylePlain">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="{TemplateBinding BorderThickness}"
+                 RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                              Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                              To="0.9" Duration="0:0:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                              Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                              To="0.9" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                              Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                              To="1" Duration="0:0:0.1"/>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                              Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                              To="1" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <Style TargetType="{x:Type Button}" x:Key="btncutsomstyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}"
+         BorderBrush="{TemplateBinding BorderBrush}"
+         BorderThickness="{TemplateBinding BorderThickness}"
+         RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                      Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                      To="0.9" Duration="0:0:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                      Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                      To="0.9" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                      Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                      To="1" Duration="0:0:0.1"/>
+                                            <DoubleAnimation Storyboard.TargetName="border"
+                                      Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                      To="1" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FFEAEAEA"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid>
+
+
+            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Hidden" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
+
+                <Image x:Name="logoImage" 
+               HorizontalAlignment="Left" 
+               Height="120" 
+               Margin="552,262,0,0" 
+               VerticalAlignment="Top" 
+               Width="259" 
+               Source="/view/logo.jpg"
+               Opacity="0">
+                    <!-- Define the storyboard directly within the Image's Resources -->
+                    <Image.Triggers>
+                        <EventTrigger RoutedEvent="Image.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                From="0"
+                                To="1"
+                                Duration="0:0:2">
+                                        <DoubleAnimation.EasingFunction>
+                                            <QuadraticEase EasingMode="EaseIn" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Image.Triggers>
+                </Image>
+
+                <!--<Image HorizontalAlignment="Left" Height="120" Margin="552,262,0,0" VerticalAlignment="Top" Width="259" Source="pack://application:,,,/view/logo.jpg"/>-->
+                <Image gif:ImageBehavior.AnimatedSource="/view/loading.gif" Grid.Column="0" Margin="505,322,505,222" Stretch="UniformToFill">
+                    <Image.Triggers>
+                        <EventTrigger RoutedEvent="Image.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+            Storyboard.TargetProperty="Opacity"
+            From="0"
+            To="1"
+            Duration="0:0:2">
+                                        <DoubleAnimation.EasingFunction>
+                                            <QuadraticEase EasingMode="EaseIn" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Image.Triggers>
+                </Image>
+            </Grid>
+
+            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Visible">
+
+                <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
+                    <!--control panel-->
+
+                    <Button x:Name="Home" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,138,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickHome" Background="{x:Null}">
+                        <Image Source="/view/house-chimney-blank.png" />
+                    </Button>
+
+                    <Button x:Name="Settings" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,84,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickSettings" Background="{x:Null}">
+                        <Image Source="/view/settings (3).png" />
+                    </Button>
+
+                    <Button x:Name="information" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,32,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickinfo" Background="{x:Null}">
+                        <Image Source="/view/comment-info (1).png" />
+                    </Button>
+
+                    <Label x:Name="headTile" Content="Home" HorizontalAlignment="Left" Margin="27,0,0,0" VerticalAlignment="Top" FontSize="36"/>
+                    <TextBlock x:Name="infoTile" HorizontalAlignment="Left" Margin="36,62,0,0" TextWrapping="Wrap" Text="Welcome to SnapShot! Capture, organize, and share your screen effortlessly. Enhance your productivity with powerful features designed for a seamless screenshot experience." VerticalAlignment="Top" Height="46" Width="506" Foreground="#FF909090" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="0.796"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0.319"/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+
+                    <Border x:Name="homeActive" HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="1139,92,0,0"
+                Width="20"
+                Height="4"
+                Background="#FFF3892F"
+                CornerRadius="1.5"/>
+
+
+                    <Border x:Name="SettingsActive" HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="1193,92,0,0"
+                Width="20"
+                Height="4"
+                Background="#FFF3892F"
+                CornerRadius="1.5"
+                Visibility="Hidden"
+                            />
+
+                    <Border x:Name="infoActive" HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="1245,92,0,0"
+                Width="20"
+                Height="4"
+                Background="#FFF3892F"
+                CornerRadius="1.5"
+                Visibility="Hidden"                           
+                            />
+
+
+                </Grid>
+
+                <Grid x:Name="homePane" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+
+                    <Button x:Name="play" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,166,534,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="playAction" Background="{x:Null}">
+                        <Image x:Name="src1" Source="/view/play.png" RenderTransformOrigin="-4.281,2.969" />
+                    </Button>
+
+                    <Button x:Name="pause" Visibility="Hidden" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,166,534,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="pauseAction" Background="{x:Null}">
+                        <Image x:Name="src2" Source="/view/pause.png" RenderTransformOrigin="-4.281,2.969" />
+                    </Button>
+                    
+                </Grid>
+                
+                <Grid x:Name="settingsPane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                   
+                    <Label Content="Settings" HorizontalAlignment="Left" Margin="653,0,0,0" VerticalAlignment="Center"/>
+                
+                </Grid>
+                
+                <Grid x:Name="infoPane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                    
+                    <Label Content="info" HorizontalAlignment="Left" Margin="653,0,0,0" VerticalAlignment="Center"/>
+                </Grid>
+
+            </Grid>
+
+            <!-- close button -->
+            <Button x:Name="exitBtn" Style="{StaticResource MyButton}" Content="" HorizontalAlignment="Right" Margin="0,20,20,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="32" Height="32" Click="exitEvent">
+                <Button.Background>
+                    <ImageBrush ImageSource="/view/cancel.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+
+            <Label x:Name="statusLabel" Content="Checking dependencies..." HorizontalAlignment="Center" Margin="0,808,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

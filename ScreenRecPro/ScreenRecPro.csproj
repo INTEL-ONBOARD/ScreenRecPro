@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="view\cancel.ico" />
+    <None Remove="view\cancel.png" />
+    <None Remove="view\cancel.svg" />
+    <None Remove="view\comment-info %281%29.png" />
+    <None Remove="view\house-chimney-blank.png" />
+    <None Remove="view\loading.gif" />
+    <None Remove="view\logo.jpg" />
+    <None Remove="view\pause.png" />
+    <None Remove="view\play.png" />
+    <None Remove="view\settings %283%29.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.Wpf.TaskbarNotification" Version="1.0.5" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="view\cancel.ico" />
+    <Resource Include="view\cancel.png" />
+    <Resource Include="view\cancel.svg" />
+    <Resource Include="view\comment-info (1).png" />
+    <Resource Include="view\house-chimney-blank.png" />
+    <Resource Include="view\loading.gif" />
+    <Resource Include="view\logo.jpg" />
+    <Resource Include="view\pause.png" />
+    <Resource Include="view\play.png" />
+    <Resource Include="view\settings (3).png" />
+  </ItemGroup>
+
+</Project>

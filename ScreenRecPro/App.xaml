@@ -1,0 +1,10 @@
+﻿<Application x:Class="ScreenRecPro.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ScreenRecPro"
+             StartupUri="view/MainWindow.xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
