@@ -133,6 +133,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
 
 
     </Window.Resources>
@@ -263,17 +264,49 @@
                     <Button x:Name="pause" Visibility="Hidden" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,166,534,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="pauseAction" Background="{x:Null}">
                         <Image x:Name="src2" Source="/view/pause.png" RenderTransformOrigin="-4.281,2.969" />
                     </Button>
+                    <Rectangle HorizontalAlignment="Left" Height="106" Margin="673,403,0,0" VerticalAlignment="Top" Width="2">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="Black" Opacity="0.6"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Content="Taking Screenshots" HorizontalAlignment="Left" Margin="295,412,0,0" VerticalAlignment="Top" FontSize="36"/>
+                    <Label Content="Taking Screenshots" HorizontalAlignment="Left" Margin="418,463,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF949494"/>
                     
+                    <!--stop screenshot service-->
+                    <Ellipse HorizontalAlignment="Left" Height="13" Margin="584,475,0,0" VerticalAlignment="Top" Width="13" Fill="#FFED1212"/>
+                    <!--run screenshot service-->
+                    <Ellipse x:Name="BlinkingEllipse"
+             HorizontalAlignment="Left" Height="13" Margin="584,475,0,0"
+             VerticalAlignment="Top" Width="13" Fill="#FFED9512">
+                        <Ellipse.Triggers>
+                            <EventTrigger RoutedEvent="Ellipse.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <!-- Animation for fading out -->
+                                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="1.0" To="0.0"
+                            Duration="0:0:0.5"
+                            AutoReverse="True"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Ellipse.Triggers>
+                    </Ellipse>
+                    <Label Content="Playing" HorizontalAlignment="Left" Margin="751,423,0,0" VerticalAlignment="Top" FontSize="24"/>
+                    <Label Content="C:testing??" HorizontalAlignment="Left" Margin="751,456,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF989898" FontWeight="ExtraLight"/>
+
+
                 </Grid>
-                
+
                 <Grid x:Name="settingsPane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
-                   
+
                     <Label Content="Settings" HorizontalAlignment="Left" Margin="653,0,0,0" VerticalAlignment="Center"/>
-                
+
                 </Grid>
-                
+
                 <Grid x:Name="infoPane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
-                    
+
                     <Label Content="info" HorizontalAlignment="Left" Margin="653,0,0,0" VerticalAlignment="Center"/>
                 </Grid>
 
