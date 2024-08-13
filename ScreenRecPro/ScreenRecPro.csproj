@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="view\bg.png" />
     <None Remove="view\cancel.ico" />
     <None Remove="view\cancel.png" />
     <None Remove="view\cancel.svg" />
@@ -20,6 +21,7 @@
     <None Remove="view\pause.png" />
     <None Remove="view\play.png" />
     <None Remove="view\settings %283%29.png" />
+    <None Remove="view\World-Map.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="view\bg.png" />
     <Resource Include="view\cancel.ico" />
     <Resource Include="view\cancel.png" />
     <Resource Include="view\cancel.svg" />
@@ -40,6 +43,7 @@
     <Resource Include="view\pause.png" />
     <Resource Include="view\play.png" />
     <Resource Include="view\settings (3).png" />
+    <Resource Include="view\World-Map.png" />
   </ItemGroup>
 
 </Project>

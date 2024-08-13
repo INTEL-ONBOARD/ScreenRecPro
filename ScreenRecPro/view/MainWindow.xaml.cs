@@ -30,7 +30,7 @@ namespace ScreenRecPro
 
         private void exitEvent(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            System.Windows.Application.Current.Shutdown();
 
         }
 
@@ -141,6 +141,11 @@ namespace ScreenRecPro
 
         }
 
-
+        private void login(object sender, RoutedEventArgs e)
+        {
+            statusLabel.Content = "hold on tight.. Logging....";
+            loginScreen.Visibility = Visibility.Hidden;
+            welcomeScreen.Visibility = Visibility.Visible;
+        }
     }
 }

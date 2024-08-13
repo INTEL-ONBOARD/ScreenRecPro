@@ -132,6 +132,37 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type PasswordBox}" x:Key="pwdCustomStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border x:Name="border"
+                        CornerRadius="10"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                  VerticalAlignment="Center"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  HorizontalAlignment="Center" Width="234" Height="46" RenderTransformOrigin="0.5,0.5" >
+                                <ScrollViewer.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ScrollViewer.RenderTransform>
+                            </ScrollViewer>
+                            <!-- Optional margin for spacing -->
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
 
 
 
@@ -190,7 +221,7 @@
         <Grid>
 
 
-            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Hidden" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
+            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Visible" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
 
                 <Image x:Name="logoImage" 
                HorizontalAlignment="Left" 
@@ -271,13 +302,71 @@
                     </Style>
                 </Grid.Style>
             </Grid>
-            <Grid x:Name="loginScreen" Margin="38,91,36,43" Visibility="Visible" Background="White">
-                <Grid x:Name="login_pane" VerticalAlignment="Center" HorizontalAlignment="Center" Height="144">
+            <Grid x:Name="loginScreen" Margin="38,91,36,43" Visibility="Hidden">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/view/World-Map.png" Stretch="Uniform" Opacity="0.2"/>
+                </Grid.Background>
+                <Grid x:Name="login_pane" VerticalAlignment="Center" HorizontalAlignment="Center" Height="224">
                     <!--<Button Style="{StaticResource RoundButtonStyle}" Content="Login" Margin="68,366,68,78" Background="{x:Null}" Cursor="Hand"/>-->
-                    <TextBox x:Name="uname" Style="{StaticResource CustomTextBoxStyle}" Margin="0,0,0,0" TextWrapping="Wrap" Tag="username@gmail.com" Width="254" Height="55" Background="{x:Null}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD2D2D2" FontSize="14" />
-                    <TextBox x:Name="pwd" Style="{StaticResource CustomTextBoxStyle}" TextWrapping="Wrap" Tag="*******" Width="254" Height="55" Background="{x:Null}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD2D2D2" FontSize="14" Margin="0,80,0,0"  />
-                
+                    <TextBox x:Name="uname" Style="{StaticResource CustomTextBoxStyle}" Margin="0,18,0,0" TextWrapping="Wrap"  Width="254" Height="55" Background="{x:Null}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD2D2D2" FontSize="14" />
+
+                    <PasswordBox x:Name="pwd"
+             Width="254"
+             Height="55"
+             VerticalContentAlignment="Center"
+             HorizontalContentAlignment="Center"
+             BorderBrush="#FFD2D2D2"
+             FontSize="14"
+             Margin="0,94,0,75"
+             Background="{x:Null}"
+             Style="{StaticResource pwdCustomStyle}"/>
+
+
+                    <Button Content="Login" 
+                            HorizontalAlignment="Center" 
+                            Height="38" 
+                            Margin="0,176,0,0" 
+                            VerticalAlignment="Top" 
+                            VerticalContentAlignment="Center" 
+                            Width="254"
+                            Cursor="Hand" Click="login">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#F0A459"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FFF38820"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Label Content="Password" HorizontalAlignment="Left" Margin="15,86,0,0" VerticalAlignment="Top" Foreground="#FF9E9E9E" Background="White" Width="59" Height="16" Padding="5,0,5,0" Grid.IsSharedSizeScope="True"/>
+
+                    <Label Content="Username" HorizontalAlignment="Left" Margin="15,10,0,0" VerticalAlignment="Top" Foreground="#FF9E9E9E" Padding="5,0,5,0" Background="White"/>
                 </Grid>
+                <Image HorizontalAlignment="Center" Height="58" Margin="0,151,0,0" VerticalAlignment="Top" Width="100" Source="/view/logo.jpg">
+                    <Image.OpacityMask>
+                        <ImageBrush ImageSource="/view/logo.jpg"/>
+                    </Image.OpacityMask>
+                </Image>
             </Grid>
             <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Hidden">
 
@@ -405,6 +494,7 @@
             </Button>
 
             <Label x:Name="statusLabel" Content="Checking dependencies..." HorizontalAlignment="Center" Margin="0,808,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            
             <Button x:Name="minimizeBtn" Style="{StaticResource MyButton}" Content="" HorizontalAlignment="Right" Margin="0,20,62,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="32" Height="32" Click="minimizeEvent">
                 <Button.Background>
                     <ImageBrush ImageSource="/view/minimize.png" Stretch="Uniform"/>
