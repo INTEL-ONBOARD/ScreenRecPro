@@ -24,31 +24,19 @@ namespace ScreenRecPro
         {
             InitializeComponent();
 
-            //ListBox listBox = new ListBox();
-
-            //Process[] processes = Process.GetProcesses();
-            //foreach (Process p in processes)
-            //{
-            //    if (!String.IsNullOrEmpty(p.MainWindowTitle))
-            //    {
-            //        listBox.Items.Add(p.MainWindowTitle);
-            //        System.Diagnostics.Debug.WriteLine(p.MainWindowTitle);
-            //    }
-            //}
             
         }
-
-
-
-
-
-
-
 
 
         private void exitEvent(object sender, RoutedEventArgs e)
         {
             this.Close();
+
+        }
+
+        private void minimizeEvent(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
 
         private void resetStatusFromLoading(object sender, DependencyPropertyChangedEventArgs e)
@@ -76,7 +64,11 @@ namespace ScreenRecPro
 
                     statusLabel.Visibility = Visibility.Hidden;
                     loadingScreen.Visibility = Visibility.Hidden;
-                    welcomeScreen.Visibility = Visibility.Visible;
+                    introScreen.Visibility = Visibility.Visible;
+                    await Task.Delay(7000);
+                    introScreen.Visibility = Visibility.Hidden;
+                    await Task.Delay(000);
+                    loginScreen.Visibility = Visibility.Visible;
 
                     break;
                 }
@@ -104,7 +96,6 @@ namespace ScreenRecPro
             infoTile.Text = "Welcome to SnapShot! Capture, organize, and share your screen effortlessly. Enhance your productivity with powerful features designed for a seamless screenshot experience.";
 
         }
-
 
         private void clickSettings(object sender, RoutedEventArgs e)
         {
@@ -149,5 +140,7 @@ namespace ScreenRecPro
             if (pause.Visibility == Visibility.Visible) { pause.Visibility = Visibility.Hidden; play.Visibility = Visibility.Visible; }
 
         }
+
+
     }
 }
