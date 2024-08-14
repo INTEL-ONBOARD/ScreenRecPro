@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ScreenRecPro
 {
@@ -20,11 +22,43 @@ namespace ScreenRecPro
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
+        private DispatcherTimer _timer;
+        private TimeSpan _timeSpan;
+        private bool _isRunning;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            _timer.Tick += Timer_Tick;
+
+            _timeSpan = TimeSpan.Zero;
+            _isRunning = false;
+
+            UpdateTimeLabel();
+        }
+
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (_isRunning)
+            {
+                _timeSpan = _timeSpan.Add(TimeSpan.FromSeconds(1));
+                UpdateTimeLabel();
+            }
+        }
+
+        private void UpdateTimeLabel()
+        {
+            System.Diagnostics.Debug.WriteLine("in:");
+
+            timeLabel.Content = _timeSpan.ToString(@"hh\:mm\:ss");
         }
 
 
@@ -131,15 +165,52 @@ namespace ScreenRecPro
 
         private void playAction(object sender, RoutedEventArgs e)
         {
-            if (play.Visibility == Visibility.Visible) { play.Visibility = Visibility.Hidden; pause.Visibility = Visibility.Visible; }
+            if (play.Visibility == Visibility.Visible) { 
+                play.Visibility = Visibility.Hidden;
+                pause.Visibility = Visibility.Visible; 
+                if (!_isRunning)
+                {
+                    _isRunning = true;
+                    _timer.Start();
+                }
+            }
 
         }
 
         private void pauseAction(object sender, RoutedEventArgs e)
         {
-            if (pause.Visibility == Visibility.Visible) { pause.Visibility = Visibility.Hidden; play.Visibility = Visibility.Visible; }
+            if (pause.Visibility == Visibility.Visible) {
+                pause.Visibility = Visibility.Hidden; 
+                play.Visibility = Visibility.Visible; 
+                if (_isRunning)
+                {
+                    _isRunning = false;
+                    _timer.Stop();
+                }
+            }
 
         }
+
+        private async void stopAction(object sender, RoutedEventArgs e)
+        {
+
+
+            if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible)) { 
+                pause.Visibility = Visibility.Hidden; 
+                play.Visibility = Visibility.Visible;
+                _isRunning = false;
+                _timer.Stop();
+                _timeSpan = TimeSpan.Zero;
+                System.Diagnostics.Debug.WriteLine("out:");
+
+                UpdateTimeLabel();
+                _timeSpan = TimeSpan.Zero;
+                timeLabel.Content = _timeSpan.ToString(@"hh\:mm\:ss");
+                await Task.Delay(1000);
+            }
+
+        }
+
 
         private void login(object sender, RoutedEventArgs e)
         {
@@ -147,5 +218,34 @@ namespace ScreenRecPro
             loginScreen.Visibility = Visibility.Hidden;
             welcomeScreen.Visibility = Visibility.Visible;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -21,6 +21,7 @@
     <None Remove="view\pause.png" />
     <None Remove="view\play.png" />
     <None Remove="view\settings %283%29.png" />
+    <None Remove="view\stop.png" />
     <None Remove="view\World-Map.png" />
   </ItemGroup>
 
@@ -43,6 +44,7 @@
     <Resource Include="view\pause.png" />
     <Resource Include="view\play.png" />
     <Resource Include="view\settings (3).png" />
+    <Resource Include="view\stop.png" />
     <Resource Include="view\World-Map.png" />
   </ItemGroup>
 
