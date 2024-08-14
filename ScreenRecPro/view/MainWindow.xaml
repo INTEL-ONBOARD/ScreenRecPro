@@ -449,14 +449,14 @@
                         </Rectangle.Fill>
                     </Rectangle>
                     <Label Content="Taking Screenshots" HorizontalAlignment="Left" Margin="295,412,0,0" VerticalAlignment="Top" FontSize="36"/>
-                    <Label Content="Taking Screenshots" HorizontalAlignment="Left" Margin="418,463,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF949494"/>
+                    <Label x:Name="timerStatus" Content="Stopped" HorizontalAlignment="Left" Margin="402,464,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF949494" Width="177" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
 
                     <!--stop screenshot service-->
-                    <Ellipse HorizontalAlignment="Left" Height="13" Margin="584,475,0,0" VerticalAlignment="Top" Width="13" Fill="#FFED1212"/>
+                    <Ellipse x:Name="bgEc" HorizontalAlignment="Left" Height="13" Margin="584,475,0,0" VerticalAlignment="Top" Width="13" Fill="Gray"/>
                     <!--run screenshot service-->
                     <Ellipse x:Name="BlinkingEllipse"
              HorizontalAlignment="Left" Height="13" Margin="584,475,0,0"
-             VerticalAlignment="Top" Width="13" Fill="#FFED9512">
+             VerticalAlignment="Top" Width="13" Fill="Gray">
                         <Ellipse.Triggers>
                             <EventTrigger RoutedEvent="Ellipse.Loaded">
                                 <BeginStoryboard>
@@ -472,8 +472,8 @@
                             </EventTrigger>
                         </Ellipse.Triggers>
                     </Ellipse>
-                    <Label Content="Playing" HorizontalAlignment="Left" Margin="751,454,0,0" VerticalAlignment="Top" FontSize="18"/>
-                    <Label Content="C:testing??" HorizontalAlignment="Left" Margin="751,475,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF989898" FontWeight="ExtraLight"/>
+                    <Label Content="Playing" HorizontalAlignment="Left" Margin="752,445,0,0" VerticalAlignment="Top" FontSize="18"/>
+                    <Label Content="C:Unkown??" HorizontalAlignment="Left" Margin="752,468,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF989898" FontWeight="ExtraLight"/>
                     <Label x:Name="timeLabel"
                Content="00:00:00"
                FontSize="36"

@@ -56,8 +56,6 @@ namespace ScreenRecPro
 
         private void UpdateTimeLabel()
         {
-            System.Diagnostics.Debug.WriteLine("in:");
-
             timeLabel.Content = _timeSpan.ToString(@"hh\:mm\:ss");
         }
 
@@ -167,7 +165,11 @@ namespace ScreenRecPro
         {
             if (play.Visibility == Visibility.Visible) { 
                 play.Visibility = Visibility.Hidden;
-                pause.Visibility = Visibility.Visible; 
+                pause.Visibility = Visibility.Visible;
+                timerStatus.Content = "Recording";
+                BlinkingEllipse.Fill = new SolidColorBrush(Colors.Red);
+                bgEc.Fill = new SolidColorBrush(Colors.Transparent);
+
                 if (!_isRunning)
                 {
                     _isRunning = true;
@@ -181,7 +183,11 @@ namespace ScreenRecPro
         {
             if (pause.Visibility == Visibility.Visible) {
                 pause.Visibility = Visibility.Hidden; 
-                play.Visibility = Visibility.Visible; 
+                play.Visibility = Visibility.Visible;
+                timerStatus.Content = "Paused";
+                BlinkingEllipse.Fill = new SolidColorBrush(Colors.Orange);
+                bgEc.Fill = new SolidColorBrush(Colors.Orange);
+
                 if (_isRunning)
                 {
                     _isRunning = false;
@@ -201,11 +207,11 @@ namespace ScreenRecPro
                 _isRunning = false;
                 _timer.Stop();
                 _timeSpan = TimeSpan.Zero;
-                System.Diagnostics.Debug.WriteLine("out:");
 
                 UpdateTimeLabel();
-                _timeSpan = TimeSpan.Zero;
-                timeLabel.Content = _timeSpan.ToString(@"hh\:mm\:ss");
+                timerStatus.Content = "Stopped";
+                BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
+                bgEc.Fill = new SolidColorBrush(Colors.Gray);
                 await Task.Delay(1000);
             }
 
