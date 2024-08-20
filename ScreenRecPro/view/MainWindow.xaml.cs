@@ -181,12 +181,11 @@ namespace ScreenRecPro
 
                 getRunnigProgramms();
                 if (multipleRunCount) { processLabel.Content = "Multiple Programms are running..."; } else { processLabel.Content = processes[0].MainWindowTitle; }
-                TakeScreenshot();
+                StartScreenshotProcess(10,true);
 
-                logView.Content = panelView;
+
                 //panelView.Children.Clear();
-                logItem lg = new logItem();
-                panelView.Children.Add(lg);
+
 
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Red);
                 bgEc.Fill = new SolidColorBrush(Colors.Transparent);
@@ -206,6 +205,7 @@ namespace ScreenRecPro
                 pause.Visibility = Visibility.Hidden; 
                 play.Visibility = Visibility.Visible;
                 timerStatus.Content = "Paused";
+                StartScreenshotProcess(10, false);
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Orange);
                 bgEc.Fill = new SolidColorBrush(Colors.Orange);
 
@@ -231,6 +231,7 @@ namespace ScreenRecPro
 
                 UpdateTimeLabel();
                 timerStatus.Content = "Stopped";
+                StartScreenshotProcess(10, false);
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
                 bgEc.Fill = new SolidColorBrush(Colors.Gray);
                 await Task.Delay(1000);
@@ -256,7 +257,46 @@ namespace ScreenRecPro
                 }
             }
         }
-        static void TakeScreenshot()
+
+
+        private void update(string data)
+        {
+            logItem lg = new logItem();
+            logView.Content = panelView;
+            lg.filePath = data;
+            lg.fileName = System.IO.Path.GetFileName(data);
+            lg.status = "Unsent";
+            lg.setImage(data);
+            panelView.Children.Add(lg);
+
+            
+        }
+
+        private async void StartScreenshotProcess(int intervalSeconds, bool initialState)
+        {
+            bool isScreenshotActive = initialState;
+            DispatcherTimer timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(intervalSeconds)
+            };
+
+            timer.Tick += async (sender, args) =>
+            {
+                if (isScreenshotActive)
+                {
+                    string path = await TakeScreenshot(); // Await the asynchronous method
+                    update(path);
+                }
+                else
+                {
+                    timer.Stop(); // Stop the timer if flag is false
+                }
+            };
+
+            timer.Start();
+        }
+
+        private async Task<string> TakeScreenshot()
         {
             // Generate a unique filename using the current date/time
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
@@ -283,10 +323,13 @@ namespace ScreenRecPro
                 }
 
                 // Save the screenshot as a PNG file
-                bitmap.Save(filename, ImageFormat.Png);
+                await Task.Run(() => bitmap.Save(filename, ImageFormat.Png));
+                System.Diagnostics.Debug.WriteLine("Saved :::::" + filename);
+
             }
 
-            System.Diagnostics.Debug.WriteLine($"Screenshot saved as {filename}");
+            // Return the path of the saved screenshot
+            return filename;
         }
     }
 }

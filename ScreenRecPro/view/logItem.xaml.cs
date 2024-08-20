@@ -27,15 +27,24 @@ namespace ScreenRecPro.view
         public logItem()
         {
             InitializeComponent();
-
             DataContext = this;
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri("C:\\Users\\wenuj\\source\\repos\\ScreenRecPro\\ScreenRecPro\\bin\\Debug\\net8.0-windows\\upload\\Screenshot_20240820_134625.png", UriKind.Absolute);
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.EndInit();
+        }
+        public async void setImage(string filepath) {
+            try {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(filepath, UriKind.Absolute);
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
 
-            imgSrc.Source = bitmapImage;
+                await Task.Delay(1000);
+                bitmapImage.EndInit();
+
+
+                imgSrc.Source = bitmapImage;
+            } catch {
+                System.Diagnostics.Debug.WriteLine("Files not found issue occured!  --- " + filepath);
+
+            }
 
         }
     }
