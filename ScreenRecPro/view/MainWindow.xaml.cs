@@ -260,7 +260,6 @@ namespace ScreenRecPro
             }
         }
 
-
         private void update(string data)
         {
             logItem lg = new logItem();
@@ -286,53 +285,51 @@ namespace ScreenRecPro
             {
                 if (isScreenshotActive)
                 {
-                    string path = await TakeScreenshot(); // Await the asynchronous method
+                    string path = await TakeScreenshot(); 
                     update(path);
                 }
                 else
                 {
-                    timer.Stop(); // Stop the timer if flag is false
-                    timer.Tick -= Timer_Tick; // Unsubscribe from the Tick event
+                    timer.Stop(); 
+                    timer.Tick -= Timer_Tick; 
                 }
             };
 
             timer.Start();
         }
 
-
         private async Task<string> TakeScreenshot()
         {
-            // Generate a unique filename using the current date/time
+
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             string folderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "upload");
             string filename = System.IO.Path.Combine(folderPath, $"Screenshot_{timestamp}.png");
 
-            // Ensure the "upload" directory exists
+
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
-            // Get the dimensions of the primary screen
+
             var screenWidth = (int)SystemParameters.PrimaryScreenWidth;
             var screenHeight = (int)SystemParameters.PrimaryScreenHeight;
 
-            // Create a bitmap to store the screenshot
             using (Bitmap bitmap = new Bitmap(screenWidth, screenHeight))
             {
-                // Take the screenshot
+      
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
                     g.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
                 }
 
-                // Save the screenshot as a PNG file
+    
                 await Task.Run(() => bitmap.Save(filename, ImageFormat.Png));
                 System.Diagnostics.Debug.WriteLine("Saved :::::" + filename);
 
             }
 
-            // Return the path of the saved screenshot
+
             return filename;
         }
     }
