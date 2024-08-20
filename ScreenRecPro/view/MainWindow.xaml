@@ -221,7 +221,7 @@
         <Grid>
 
 
-            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Hidden" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
+            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Visible" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
 
                 <Image x:Name="logoImage" 
                HorizontalAlignment="Left" 
@@ -429,7 +429,7 @@
 
                 </Grid>
 
-                <Grid x:Name="homePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="homePane" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <Button x:Name="play" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,670,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="playAction" Background="{x:Null}">
                         <Image x:Name="src1" Source="/view/play.png" RenderTransformOrigin="-4.281,2.969" />
@@ -490,7 +490,7 @@
 
                 </Grid>
 
-                <Grid x:Name="infoPane" Visibility="Visible" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="infoPane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <ScrollViewer x:Name="logView" Grid.Column="0" Margin="154,43,154,10" VerticalScrollBarVisibility="Hidden">
                         <StackPanel x:Name="panelView" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>

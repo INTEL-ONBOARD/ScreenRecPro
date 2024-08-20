@@ -40,6 +40,8 @@ namespace ScreenRecPro
         List<Process> processList = new List<Process>();
         private bool multipleRunCount;
         Process[] processes;
+        private bool isScreenshotActive;
+
 
 
         public MainWindow()
@@ -205,7 +207,7 @@ namespace ScreenRecPro
                 pause.Visibility = Visibility.Hidden; 
                 play.Visibility = Visibility.Visible;
                 timerStatus.Content = "Paused";
-                StartScreenshotProcess(10, false);
+                StartScreenshotProcess(0, false);
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Orange);
                 bgEc.Fill = new SolidColorBrush(Colors.Orange);
 
@@ -231,7 +233,7 @@ namespace ScreenRecPro
 
                 UpdateTimeLabel();
                 timerStatus.Content = "Stopped";
-                StartScreenshotProcess(10, false);
+                StartScreenshotProcess(0, false);
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
                 bgEc.Fill = new SolidColorBrush(Colors.Gray);
                 await Task.Delay(1000);
@@ -274,7 +276,7 @@ namespace ScreenRecPro
 
         private async void StartScreenshotProcess(int intervalSeconds, bool initialState)
         {
-            bool isScreenshotActive = initialState;
+            isScreenshotActive = initialState;
             DispatcherTimer timer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromSeconds(intervalSeconds)
@@ -290,11 +292,13 @@ namespace ScreenRecPro
                 else
                 {
                     timer.Stop(); // Stop the timer if flag is false
+                    timer.Tick -= Timer_Tick; // Unsubscribe from the Tick event
                 }
             };
 
             timer.Start();
         }
+
 
         private async Task<string> TakeScreenshot()
         {
