@@ -28,6 +28,11 @@ namespace ScreenRecPro
         private TimeSpan _timeSpan;
         private bool _isRunning;
 
+        List<Process> processList = new List<Process>();
+        private bool multipleRunCount;
+        Process[] processes;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -58,7 +63,6 @@ namespace ScreenRecPro
         {
             timeLabel.Content = _timeSpan.ToString(@"hh\:mm\:ss");
         }
-
 
         private void exitEvent(object sender, RoutedEventArgs e)
         {
@@ -159,14 +163,14 @@ namespace ScreenRecPro
 
         }
 
-
-
         private void playAction(object sender, RoutedEventArgs e)
         {
             if (play.Visibility == Visibility.Visible) { 
                 play.Visibility = Visibility.Hidden;
                 pause.Visibility = Visibility.Visible;
                 timerStatus.Content = "Recording";
+                getRunnigProgramms();
+                if (multipleRunCount) { processLabel.Content = "Multiple Programms are running..."; } else { processLabel.Content = processes[0].MainWindowTitle; }
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Red);
                 bgEc.Fill = new SolidColorBrush(Colors.Transparent);
 
@@ -217,7 +221,6 @@ namespace ScreenRecPro
 
         }
 
-
         private void login(object sender, RoutedEventArgs e)
         {
             statusLabel.Content = "hold on tight.. Logging....";
@@ -225,33 +228,16 @@ namespace ScreenRecPro
             welcomeScreen.Visibility = Visibility.Visible;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private void getRunnigProgramms() {
+            processes = Process.GetProcesses();
+            if (processes.Length > 1) { multipleRunCount = true; } else { multipleRunCount = false; }
+            foreach (Process p in processes)
+            {
+                if (!String.IsNullOrEmpty(p.MainWindowTitle))
+                { 
+                    System.Diagnostics.Debug.WriteLine(p.MainWindowTitle);
+                }
+            }
+        }
     }
 }

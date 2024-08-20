@@ -221,7 +221,7 @@
         <Grid>
 
 
-            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Hidden" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
+            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Visible" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
 
                 <Image x:Name="logoImage" 
                HorizontalAlignment="Left" 
@@ -368,7 +368,7 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Visible">
+            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Hidden">
 
                 <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
                     <!--control panel-->
@@ -473,7 +473,7 @@
                         </Ellipse.Triggers>
                     </Ellipse>
                     <Label Content="Playing" HorizontalAlignment="Left" Margin="752,445,0,0" VerticalAlignment="Top" FontSize="18"/>
-                    <Label Content="C:Unkown??" HorizontalAlignment="Left" Margin="752,468,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF989898" FontWeight="ExtraLight"/>
+                    <Label x:Name="processLabel" Content="C:Unkown??" HorizontalAlignment="Left" Margin="752,468,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF989898" FontWeight="ExtraLight"/>
                     <Label x:Name="timeLabel"
                Content="00:00:00"
                FontSize="36"
