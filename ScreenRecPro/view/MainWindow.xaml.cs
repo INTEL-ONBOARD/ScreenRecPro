@@ -21,6 +21,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows;
+using ScreenRecPro.view;
 
 namespace ScreenRecPro
 
@@ -177,9 +178,16 @@ namespace ScreenRecPro
                 play.Visibility = Visibility.Hidden;
                 pause.Visibility = Visibility.Visible;
                 timerStatus.Content = "Recording";
+
                 getRunnigProgramms();
                 if (multipleRunCount) { processLabel.Content = "Multiple Programms are running..."; } else { processLabel.Content = processes[0].MainWindowTitle; }
                 TakeScreenshot();
+
+                logView.Content = panelView;
+                //panelView.Children.Clear();
+                logItem lg = new logItem();
+                panelView.Children.Add(lg);
+
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Red);
                 bgEc.Fill = new SolidColorBrush(Colors.Transparent);
 

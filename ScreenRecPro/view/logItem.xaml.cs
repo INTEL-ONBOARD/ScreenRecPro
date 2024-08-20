@@ -20,9 +20,23 @@ namespace ScreenRecPro.view
     /// </summary>
     public partial class logItem : UserControl
     {
+        public string filePath { get; set; }
+        public string fileName { get; set; }
+        public string status { get; set; }
+
         public logItem()
         {
             InitializeComponent();
+
+            DataContext = this;
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri("C:\\Users\\wenuj\\source\\repos\\ScreenRecPro\\ScreenRecPro\\bin\\Debug\\net8.0-windows\\upload\\Screenshot_20240820_134625.png", UriKind.Absolute);
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.EndInit();
+
+            imgSrc.Source = bitmapImage;
+
         }
     }
 }

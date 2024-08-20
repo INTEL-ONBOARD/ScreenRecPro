@@ -4,8 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ScreenRecPro.view"
-             mc:Ignorable="d" d:DesignWidth="800" Height="65">
-    <Grid Background="#FFD87575">
+             mc:Ignorable="d" Height="163" Width="1146">
+    <Grid Cursor="Hand">
+        <Image x:Name="imgSrc" HorizontalAlignment="Left" Height="122" Margin="29,15,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label Content="ScreenCapture" HorizontalAlignment="Left" Margin="250,4,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="SemiBold">
+            <Label.Foreground>
+                <SolidColorBrush Color="Black" Opacity="0.4"/>
+            </Label.Foreground>
+            <Label.Background>
+                <SolidColorBrush Opacity="0.4"/>
+            </Label.Background>
+        </Label>
+        <Label Content="Date : " HorizontalAlignment="Left" Margin="250,57,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="ExtraLight" Foreground="#FF929292"/>
+        <Label Content="Filepath :" HorizontalAlignment="Left" Margin="250,78,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="ExtraLight" Foreground="#FF929292"/>
+        <Label Content="Date" HorizontalAlignment="Left" Margin="297,57,0,0" VerticalAlignment="Top" FontSize="16" Width="257" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFD4D4D4"/>
+        <Label Content="Filepath" HorizontalAlignment="Left" Margin="320,78,0,0" VerticalAlignment="Top" FontSize="16" Width="257" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFD4D4D4"/>
+        <Rectangle HorizontalAlignment="Center" Height="1" Margin="0,153,0,0" VerticalAlignment="Top" Width="1146">
+            <Rectangle.Stroke>
+                <SolidColorBrush Color="#FF757575" Opacity="0.3"/>
+            </Rectangle.Stroke>
+        </Rectangle>
+        <Label Content="Status :" HorizontalAlignment="Left" Margin="250,101,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="ExtraLight" Foreground="#FF929292"/>
+        <Label Content="Unknown" HorizontalAlignment="Left" Margin="309,101,0,0" VerticalAlignment="Top" FontSize="16" Width="257" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="#FFD4D4D4"/>
 
     </Grid>
 </UserControl>
