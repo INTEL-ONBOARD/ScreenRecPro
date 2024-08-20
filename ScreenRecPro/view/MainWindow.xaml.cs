@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.Drawing;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows;
@@ -14,8 +16,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Drawing.Imaging;
+using System.Windows;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Windows;
 
 namespace ScreenRecPro
+
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -171,6 +179,7 @@ namespace ScreenRecPro
                 timerStatus.Content = "Recording";
                 getRunnigProgramms();
                 if (multipleRunCount) { processLabel.Content = "Multiple Programms are running..."; } else { processLabel.Content = processes[0].MainWindowTitle; }
+                TakeScreenshot();
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Red);
                 bgEc.Fill = new SolidColorBrush(Colors.Transparent);
 
@@ -238,6 +247,38 @@ namespace ScreenRecPro
                     System.Diagnostics.Debug.WriteLine(p.MainWindowTitle);
                 }
             }
+        }
+        static void TakeScreenshot()
+        {
+            // Generate a unique filename using the current date/time
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string folderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "upload");
+            string filename = System.IO.Path.Combine(folderPath, $"Screenshot_{timestamp}.png");
+
+            // Ensure the "upload" directory exists
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            // Get the dimensions of the primary screen
+            var screenWidth = (int)SystemParameters.PrimaryScreenWidth;
+            var screenHeight = (int)SystemParameters.PrimaryScreenHeight;
+
+            // Create a bitmap to store the screenshot
+            using (Bitmap bitmap = new Bitmap(screenWidth, screenHeight))
+            {
+                // Take the screenshot
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
+                }
+
+                // Save the screenshot as a PNG file
+                bitmap.Save(filename, ImageFormat.Png);
+            }
+
+            System.Diagnostics.Debug.WriteLine($"Screenshot saved as {filename}");
         }
     }
 }
