@@ -213,7 +213,7 @@
             </Setter>
         </Style>
 
- 
+
 
     </Window.Resources>
 
@@ -221,7 +221,7 @@
         <Grid>
 
 
-            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Visible" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
+            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Hidden" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
 
                 <Image x:Name="logoImage" 
                HorizontalAlignment="Left" 
@@ -373,15 +373,15 @@
                 <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
                     <!--control panel-->
 
-                    <Button x:Name="Home" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,138,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickHome" Background="{x:Null}">
+                    <Button x:Name="Home" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,176,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickHome" Background="{x:Null}">
                         <Image Source="/view/house-chimney-blank.png" />
                     </Button>
 
-                    <Button x:Name="Settings" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,84,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickSettings" Background="{x:Null}">
+                    <Button x:Name="Settings" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,122,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickSettings" Background="{x:Null}">
                         <Image Source="/view/settings (3).png" />
                     </Button>
 
-                    <Button x:Name="information" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,32,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickinfo" Background="{x:Null}">
+                    <Button x:Name="information" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,70,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="clickinfo" Background="{x:Null}">
                         <Image Source="/view/comment-info (1).png" />
                     </Button>
 
@@ -399,7 +399,7 @@
 
                     <Border x:Name="homeActive" HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="1139,92,0,0"
+                Margin="1101,92,0,0"
                 Width="20"
                 Height="4"
                 Background="#FFF3892F"
@@ -408,7 +408,7 @@
 
                     <Border x:Name="SettingsActive" HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="1193,92,0,0"
+                Margin="1155,92,0,0"
                 Width="20"
                 Height="4"
                 Background="#FFF3892F"
@@ -418,13 +418,16 @@
 
                     <Border x:Name="infoActive" HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="1245,92,0,0"
+                Margin="1207,92,0,0"
                 Width="20"
                 Height="4"
                 Background="#FFF3892F"
                 CornerRadius="1.5"
                 Visibility="Hidden"                           
                             />
+                    <Button x:Name="logoutBtn" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,54,18,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="38" Height="34" Click="logout" Background="{x:Null}">
+                        <Image Source="/view/logout.png" />
+                    </Button>
 
 
                 </Grid>
@@ -495,7 +498,7 @@
                     <ScrollViewer x:Name="logView" Grid.Column="0" Margin="154,43,154,10" VerticalScrollBarVisibility="Hidden">
                         <StackPanel x:Name="panelView" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
                     </ScrollViewer>
-                    
+
                 </Grid>
 
             </Grid>

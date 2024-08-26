@@ -241,12 +241,7 @@ namespace ScreenRecPro
 
         }
 
-        private void login(object sender, RoutedEventArgs e)
-        {
-            statusLabel.Content = "hold on tight.. Logging....";
-            loginScreen.Visibility = Visibility.Hidden;
-            welcomeScreen.Visibility = Visibility.Visible;
-        }
+
 
         private void getRunnigProgramms() {
             processes = Process.GetProcesses();
@@ -331,6 +326,18 @@ namespace ScreenRecPro
 
 
             return filename;
+        }
+
+        private void login(object sender, RoutedEventArgs e)
+        {
+            statusLabel.Content = "hold on tight.. Logging....";
+            loginScreen.Visibility = Visibility.Hidden;
+            welcomeScreen.Visibility = Visibility.Visible;
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

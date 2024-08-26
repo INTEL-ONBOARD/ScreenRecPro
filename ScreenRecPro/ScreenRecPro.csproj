@@ -17,6 +17,7 @@
     <None Remove="view\house-chimney-blank.png" />
     <None Remove="view\loading.gif" />
     <None Remove="view\logo.jpg" />
+    <None Remove="view\logout.png" />
     <None Remove="view\minimize.png" />
     <None Remove="view\pause.png" />
     <None Remove="view\play.png" />
@@ -40,6 +41,7 @@
     <Resource Include="view\house-chimney-blank.png" />
     <Resource Include="view\loading.gif" />
     <Resource Include="view\logo.jpg" />
+    <Resource Include="view\logout.png" />
     <Resource Include="view\minimize.png" />
     <Resource Include="view\pause.png" />
     <Resource Include="view\play.png" />
