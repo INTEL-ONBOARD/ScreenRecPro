@@ -345,7 +345,8 @@ namespace ScreenRecPro
             }
             else
             {
-                statusLabel.Content = "Login failed. Please try again.";
+                statusLabel.Content = "Login failed. The username or password you entered is incorrect. Please try again.";
+                statusLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -364,6 +365,18 @@ namespace ScreenRecPro
             {
                 statusLabel.Content = "Logout failed. Please try again.";
             }
+        }
+
+        private void txtChanged(object sender, TextChangedEventArgs e)
+        {
+            //statusLabel.Content = "Attempting to log in again. Please wait...";
+            statusLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void txtChanged(object sender, RoutedEventArgs e)
+        {
+            //statusLabel.Content = "Attempting to log in again. Please wait...";
+            statusLabel.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -308,7 +308,7 @@
                 </Grid.Background>
                 <Grid x:Name="login_pane" VerticalAlignment="Center" HorizontalAlignment="Center" Height="224">
                     <!--<Button Style="{StaticResource RoundButtonStyle}" Content="Login" Margin="68,366,68,78" Background="{x:Null}" Cursor="Hand"/>-->
-                    <TextBox x:Name="uname" Style="{StaticResource CustomTextBoxStyle}" Margin="0,18,0,0" TextWrapping="Wrap"  Width="254" Height="55" Background="{x:Null}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD2D2D2" FontSize="14" />
+                    <TextBox x:Name="uname" Style="{StaticResource CustomTextBoxStyle}" Margin="0,18,0,0" TextWrapping="Wrap"  Width="254" Height="55" Background="{x:Null}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFD2D2D2" FontSize="14" TextChanged="txtChanged" />
 
                     <PasswordBox x:Name="pwd"
              Width="254"
@@ -319,7 +319,7 @@
              FontSize="14"
              Margin="0,94,0,75"
              Background="{x:Null}"
-             Style="{StaticResource pwdCustomStyle}"/>
+             Style="{StaticResource pwdCustomStyle}" PasswordChanged="txtChanged"/>
 
 
                     <Button Content="Login" 
