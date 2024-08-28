@@ -184,7 +184,7 @@ namespace ScreenRecPro
 
                 getRunnigProgramms();
                 if (multipleRunCount) { processLabel.Content = "Multiple Programms are running..."; } else { processLabel.Content = processes[0].MainWindowTitle; }
-                StartScreenshotProcess(10,true);
+                StartScreenshotProcess(true);
 
 
                 //panelView.Children.Clear();
@@ -208,7 +208,7 @@ namespace ScreenRecPro
                 pause.Visibility = Visibility.Hidden; 
                 play.Visibility = Visibility.Visible;
                 timerStatus.Content = "Paused";
-                StartScreenshotProcess(0, false);
+                StartScreenshotProcess(false);
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Orange);
                 bgEc.Fill = new SolidColorBrush(Colors.Orange);
 
@@ -234,15 +234,13 @@ namespace ScreenRecPro
 
                 UpdateTimeLabel();
                 timerStatus.Content = "Stopped";
-                StartScreenshotProcess(0, false);
+                StartScreenshotProcess(false);
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
                 bgEc.Fill = new SolidColorBrush(Colors.Gray);
                 await Task.Delay(1000);
             }
 
         }
-
-
 
         private void getRunnigProgramms() {
             processes = Process.GetProcesses();
@@ -269,25 +267,33 @@ namespace ScreenRecPro
             
         }
 
-        private async void StartScreenshotProcess(int intervalSeconds, bool initialState)
+        private async void StartScreenshotProcess(bool initialState)
         {
             isScreenshotActive = initialState;
+            Random random = new Random(); 
+
+            
+            int randomIntervalSeconds = random.Next(1, 26); 
+            System.Diagnostics.Debug.WriteLine($"{randomIntervalSeconds} ms");
             DispatcherTimer timer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(intervalSeconds)
+                Interval = TimeSpan.FromSeconds(randomIntervalSeconds)
             };
 
             timer.Tick += async (sender, args) =>
             {
                 if (isScreenshotActive)
                 {
-                    string path = await TakeScreenshot(); 
+                    string path = await TakeScreenshot();
                     update(path);
+
+                    
+                    timer.Interval = TimeSpan.FromSeconds(random.Next(1, 31));
                 }
                 else
                 {
-                    timer.Stop(); 
-                    timer.Tick -= Timer_Tick; 
+                    timer.Stop();
+                    timer.Tick -= Timer_Tick;
                 }
             };
 
@@ -358,6 +364,24 @@ namespace ScreenRecPro
             {
                 uname.Text = "";
                 pwd.Clear();
+
+                if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible))
+                {
+                    pause.Visibility = Visibility.Hidden;
+                    play.Visibility = Visibility.Visible;
+                    _isRunning = false;
+                    _timer.Stop();
+                    _timeSpan = TimeSpan.Zero;
+
+                    UpdateTimeLabel();
+                    timerStatus.Content = "Stopped";
+                    StartScreenshotProcess(false);
+                    BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
+                    bgEc.Fill = new SolidColorBrush(Colors.Gray);
+                    await Task.Delay(1000);
+                }
+
+
                 loginScreen.Visibility = Visibility.Visible;
                 welcomeScreen.Visibility = Visibility.Hidden;
             }

@@ -221,7 +221,7 @@
         <Grid>
 
 
-            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Hidden" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
+            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Visible" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
 
                 <Image x:Name="logoImage" 
                HorizontalAlignment="Left" 
