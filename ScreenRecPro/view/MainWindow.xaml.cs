@@ -291,7 +291,7 @@ namespace ScreenRecPro
                     timer.Interval = TimeSpan.FromSeconds(newRandomIntervalSeconds);
                     System.Diagnostics.Debug.WriteLine($"Next interval: {newRandomIntervalSeconds} seconds");
 
-                    timer.Interval = TimeSpan.FromSeconds(random.Next(1, 31));
+                    
                 }
                 else
                 {
