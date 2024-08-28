@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows;
 using ScreenRecPro.view;
+using ScreenRecPro.model;
 
 namespace ScreenRecPro
 
@@ -328,16 +329,41 @@ namespace ScreenRecPro
             return filename;
         }
 
-        private void login(object sender, RoutedEventArgs e)
+        private async void login(object sender, RoutedEventArgs e)
         {
             statusLabel.Content = "hold on tight.. Logging....";
-            loginScreen.Visibility = Visibility.Hidden;
-            welcomeScreen.Visibility = Visibility.Visible;
+
+            // Assuming model.requestEngine.ValidUser() was intended to call ValidUser()
+            String une = uname.Text;
+            String pwdd = pwd.Password.ToString();
+            string loginResult = await model.requestEngine.logInUser(une,pwdd);
+
+            if (loginResult == "true")
+            {
+                loginScreen.Visibility = Visibility.Hidden;
+                welcomeScreen.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                statusLabel.Content = "Login failed. Please try again.";
+            }
         }
 
-        private void logout(object sender, RoutedEventArgs e)
+        private async void logout(object sender, RoutedEventArgs e)
         {
+            string logoutResult = await model.requestEngine.logOutUser();
 
+            if (logoutResult == "true")
+            {
+                uname.Text = "";
+                pwd.Clear();
+                loginScreen.Visibility = Visibility.Visible;
+                welcomeScreen.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                statusLabel.Content = "Logout failed. Please try again.";
+            }
         }
     }
 }
