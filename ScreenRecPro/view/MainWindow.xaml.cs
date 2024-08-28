@@ -287,7 +287,10 @@ namespace ScreenRecPro
                     string path = await TakeScreenshot();
                     update(path);
 
-                    
+                    int newRandomIntervalSeconds = random.Next(1, 26); 
+                    timer.Interval = TimeSpan.FromSeconds(newRandomIntervalSeconds);
+                    System.Diagnostics.Debug.WriteLine($"Next interval: {newRandomIntervalSeconds} seconds");
+
                     timer.Interval = TimeSpan.FromSeconds(random.Next(1, 31));
                 }
                 else
@@ -365,6 +368,7 @@ namespace ScreenRecPro
                 uname.Text = "";
                 pwd.Clear();
 
+                panelView.Children.Clear();
                 if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible))
                 {
                     pause.Visibility = Visibility.Hidden;
