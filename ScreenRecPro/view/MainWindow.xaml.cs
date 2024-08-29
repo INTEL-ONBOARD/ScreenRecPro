@@ -33,7 +33,7 @@ namespace ScreenRecPro
     public partial class MainWindow : Window
     {
 
-
+        private bool pauseCheck = false;
         private DispatcherTimer _timer;
         private TimeSpan _timeSpan;
         private bool _isRunning;
@@ -187,9 +187,9 @@ namespace ScreenRecPro
                 StartScreenshotProcess(true);
 
 
+
+
                 //panelView.Children.Clear();
-
-
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Red);
                 bgEc.Fill = new SolidColorBrush(Colors.Transparent);
 
