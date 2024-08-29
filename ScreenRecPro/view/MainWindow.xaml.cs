@@ -33,7 +33,7 @@ namespace ScreenRecPro
     public partial class MainWindow : Window
     {
 
-
+        private bool pauseCheck = false;
         private DispatcherTimer _timer;
         private TimeSpan _timeSpan;
         private bool _isRunning;
@@ -175,7 +175,7 @@ namespace ScreenRecPro
 
         }
 
-        private void playAction(object sender, RoutedEventArgs e)
+        private async void playAction(object sender, RoutedEventArgs e)
         {
             if (play.Visibility == Visibility.Visible) { 
                 play.Visibility = Visibility.Hidden;
@@ -186,10 +186,20 @@ namespace ScreenRecPro
                 if (multipleRunCount) { processLabel.Content = "Multiple Programms are running..."; } else { processLabel.Content = processes[0].MainWindowTitle; }
                 StartScreenshotProcess(true);
 
+                if (pauseCheck)
+                {
+                    string response = await requestEngine.breakout();
+                    if (response == "true") { System.Diagnostics.Debug.WriteLine("break out success!"); } else { System.Diagnostics.Debug.WriteLine("break out faild!"); }
+                    pauseCheck = false;
+                }
+                else
+                {
+                    string response = await requestEngine.punchin();
+                    if (response == "true") { System.Diagnostics.Debug.WriteLine("Punch in success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch in !"); }
+                }
+
 
                 //panelView.Children.Clear();
-
-
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Red);
                 bgEc.Fill = new SolidColorBrush(Colors.Transparent);
 
@@ -202,13 +212,18 @@ namespace ScreenRecPro
 
         }
 
-        private void pauseAction(object sender, RoutedEventArgs e)
+        private async void pauseAction(object sender, RoutedEventArgs e)    
         {
             if (pause.Visibility == Visibility.Visible) {
                 pause.Visibility = Visibility.Hidden; 
                 play.Visibility = Visibility.Visible;
                 timerStatus.Content = "Paused";
                 StartScreenshotProcess(false);
+                pauseCheck = true;
+
+                string response = await requestEngine.breakin();
+                if (response == "true") { System.Diagnostics.Debug.WriteLine("break in success!"); } else { System.Diagnostics.Debug.WriteLine("break in faild!"); }
+
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Orange);
                 bgEc.Fill = new SolidColorBrush(Colors.Orange);
 
@@ -223,8 +238,6 @@ namespace ScreenRecPro
 
         private async void stopAction(object sender, RoutedEventArgs e)
         {
-
-
             if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible)) { 
                 pause.Visibility = Visibility.Hidden; 
                 play.Visibility = Visibility.Visible;
@@ -235,6 +248,26 @@ namespace ScreenRecPro
                 UpdateTimeLabel();
                 timerStatus.Content = "Stopped";
                 StartScreenshotProcess(false);
+
+                if (pauseCheck)
+                {
+                    string response1 = await requestEngine.breakout();
+                    if (response1 == "true") { System.Diagnostics.Debug.WriteLine("break out success!"); } else { System.Diagnostics.Debug.WriteLine("break out faild!"); }
+
+                    string response2 = await requestEngine.punchout();
+                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+
+                    //System.Diagnostics.Debug.WriteLine("~break out success!");
+                    //System.Diagnostics.Debug.WriteLine("punch out success!");
+                    pauseCheck = false;
+                }
+                else
+                {
+                    string response2 = await requestEngine.punchout();
+                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+                    pauseCheck = false;
+                }
+
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
                 bgEc.Fill = new SolidColorBrush(Colors.Gray);
                 await Task.Delay(1000);
@@ -341,7 +374,7 @@ namespace ScreenRecPro
         private async void login(object sender, RoutedEventArgs e)
         {
             statusLabel.Content = "hold on tight.. Logging....";
-
+            //statusLabel.Visibility = Visibility.Visible;
             // Assuming model.requestEngine.ValidUser() was intended to call ValidUser()
             String une = uname.Text;
             String pwdd = pwd.Password.ToString();
