@@ -188,14 +188,14 @@ namespace ScreenRecPro
 
                 if (pauseCheck)
                 {
-                    System.Diagnostics.Debug.WriteLine("break out success!");
-                    pauseCheck =false;
+                    string response = await requestEngine.breakout();
+                    if (response == "true") { System.Diagnostics.Debug.WriteLine("break out success!"); } else { System.Diagnostics.Debug.WriteLine("break out faild!"); }
+                    pauseCheck = false;
                 }
                 else
                 {
                     string response = await requestEngine.punchin();
                     if (response == "true") { System.Diagnostics.Debug.WriteLine("Punch in success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch in !"); }
-
                 }
 
 
@@ -212,7 +212,7 @@ namespace ScreenRecPro
 
         }
 
-        private void pauseAction(object sender, RoutedEventArgs e)
+        private async void pauseAction(object sender, RoutedEventArgs e)    
         {
             if (pause.Visibility == Visibility.Visible) {
                 pause.Visibility = Visibility.Hidden; 
@@ -220,7 +220,10 @@ namespace ScreenRecPro
                 timerStatus.Content = "Paused";
                 StartScreenshotProcess(false);
                 pauseCheck = true;
-                System.Diagnostics.Debug.WriteLine("break in success!");
+
+                string response = await requestEngine.breakin();
+                if (response == "true") { System.Diagnostics.Debug.WriteLine("break in success!"); } else { System.Diagnostics.Debug.WriteLine("break in faild!"); }
+
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Orange);
                 bgEc.Fill = new SolidColorBrush(Colors.Orange);
 
@@ -248,14 +251,20 @@ namespace ScreenRecPro
 
                 if (pauseCheck)
                 {
-                    System.Diagnostics.Debug.WriteLine("~break out success!");
-                    System.Diagnostics.Debug.WriteLine("punch out success!");
+                    string response1 = await requestEngine.breakout();
+                    if (response1 == "true") { System.Diagnostics.Debug.WriteLine("break out success!"); } else { System.Diagnostics.Debug.WriteLine("break out faild!"); }
+
+                    string response2 = await requestEngine.punchout();
+                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+
+                    //System.Diagnostics.Debug.WriteLine("~break out success!");
+                    //System.Diagnostics.Debug.WriteLine("punch out success!");
                     pauseCheck = false;
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("break in success!");
-                    System.Diagnostics.Debug.WriteLine("punch out success!");
+                    string response2 = await requestEngine.punchout();
+                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
                     pauseCheck = false;
                 }
 
