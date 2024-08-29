@@ -153,10 +153,129 @@ namespace ScreenRecPro.model
                 }
             }
         }
+        public static async Task<string> breakin() {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://2pm.revostack.com");
 
-        public static async Task<string> breakin() { }
-        public static async Task<string> breakout() { }
-        public static async Task<string> punchout() { }
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                try
+                {
+                    // Create form data
+                    var formData = new Dictionary<string, string>
+                    {
+                        { "type", "2" },
+                        //{ "daily_report", "Lorem Ipsum is simply dummy text of the printing and typesetting industry..." }
+                    };
+
+                    var content = new FormUrlEncodedContent(formData);
+
+                    HttpResponseMessage myHttpResponse = await client.PostAsync("/api/v1/attendance", content);
+
+                    System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+                    System.Diagnostics.Debug.WriteLine(myHttpResponse.StatusCode);
+                    string responseContent = await myHttpResponse.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine(responseContent);
+
+                    if (myHttpResponse.IsSuccessStatusCode)
+                    {
+                        return "true";
+                    }
+                    else
+                    {
+                        return "false";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Exception: {ex.Message}");
+                    return "false";
+                }
+            }
+        }
+        public static async Task<string> breakout() {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://2pm.revostack.com");
+
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                try
+                {
+                    // Create form data
+                    var formData = new Dictionary<string, string>
+                    {
+                        { "type", "3" },
+                        //{ "daily_report", "Lorem Ipsum is simply dummy text of the printing and typesetting industry..." }
+                    };
+
+                    var content = new FormUrlEncodedContent(formData);
+
+                    HttpResponseMessage myHttpResponse = await client.PostAsync("/api/v1/attendance", content);
+
+                    System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+                    System.Diagnostics.Debug.WriteLine(myHttpResponse.StatusCode);
+                    string responseContent = await myHttpResponse.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine(responseContent);
+
+                    if (myHttpResponse.IsSuccessStatusCode)
+                    {
+                        return "true";
+                    }
+                    else
+                    {
+                        return "false";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Exception: {ex.Message}");
+                    return "false";
+                }
+            }
+        }
+        public static async Task<string> punchout() {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://2pm.revostack.com");
+
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                try
+                {
+                    // Create form data
+                    var formData = new Dictionary<string, string>
+                    {
+                        { "type", "4" },
+                        { "daily_report", "test report..." }
+                    };
+
+                    var content = new FormUrlEncodedContent(formData);
+
+                    HttpResponseMessage myHttpResponse = await client.PostAsync("/api/v1/attendance", content);
+
+                    System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+                    System.Diagnostics.Debug.WriteLine(myHttpResponse.StatusCode);
+                    string responseContent = await myHttpResponse.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine(responseContent);
+
+                    if (myHttpResponse.IsSuccessStatusCode)
+                    {
+                        return "true";
+                    }
+                    else
+                    {
+                        return "false";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Exception: {ex.Message}");
+                    return "false";
+                }
+            }
+        }
 
         //1 = punchin, 2 = breakin, 3 = breakout, 4 = punchout
 
