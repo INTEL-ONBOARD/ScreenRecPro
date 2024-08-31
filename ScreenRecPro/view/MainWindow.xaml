@@ -221,7 +221,7 @@
         <Grid>
 
 
-            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Visible" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
+            <Grid x:Name="loadingScreen" Margin="38,91,36,43" Visibility="Hidden" IsVisibleChanged="resetStatusFromLoading" Loaded="readyRun">
 
                 <Image x:Name="logoImage" 
                HorizontalAlignment="Left" 
@@ -368,7 +368,7 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Hidden">
+            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Visible">
 
                 <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
                     <!--control panel-->
@@ -432,7 +432,7 @@
 
                 </Grid>
 
-                <Grid x:Name="homePane" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="homePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <Button x:Name="play" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,670,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="playAction" Background="{x:Null}">
                         <Image x:Name="src1" Source="/view/play.png" RenderTransformOrigin="-4.281,2.969" />
@@ -487,6 +487,16 @@
 
                 </Grid>
 
+                <Grid x:Name="attendencePane" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+
+                    <ScrollViewer x:Name="logView" Grid.Column="0" Margin="80,43,653,56" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="panelView" Width="573" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                    </ScrollViewer>
+                    
+                    
+                </Grid>
+
+
                 <Grid x:Name="settingsPane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <Label Content="Settings" HorizontalAlignment="Left" Margin="653,0,0,0" VerticalAlignment="Center"/>
@@ -501,6 +511,8 @@
 
                 </Grid>
 
+                
+                
             </Grid>
 
             <!-- close button -->

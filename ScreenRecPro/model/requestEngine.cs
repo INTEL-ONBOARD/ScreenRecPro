@@ -73,7 +73,6 @@ namespace ScreenRecPro.model
                 }
             }
         }
-
         public static async Task<string> logOutUser()
         {
 
@@ -110,7 +109,6 @@ namespace ScreenRecPro.model
                 }
             }
         }
-
         public static async Task<string> punchin()
         {
             using (HttpClient client = new HttpClient())
