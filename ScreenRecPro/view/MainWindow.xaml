@@ -492,8 +492,14 @@
                     <ScrollViewer x:Name="logView" Grid.Column="0" Margin="80,43,653,56" VerticalScrollBarVisibility="Hidden">
                         <StackPanel x:Name="panelView" Width="573" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
                     </ScrollViewer>
-                    
-                    
+                    <TextBox HorizontalAlignment="Left" Margin="728,163,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="327" Height="295"/>
+                    <Label Content="Label" HorizontalAlignment="Left" Margin="728,132,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Update" HorizontalAlignment="Left" Margin="1006,480,0,0" VerticalAlignment="Top" Width="52"/>
+                    <Button Content="Clear" HorizontalAlignment="Left" Margin="944,480,0,0" VerticalAlignment="Top" Width="57"/>
+                    <Label Content="4/14" HorizontalAlignment="Left" Margin="944,43,0,0" VerticalAlignment="Top" FontSize="48"/>
+                    <Label Content="Attendence Report" HorizontalAlignment="Left" Margin="935,108,0,0" VerticalAlignment="Top"/>
+
+
                 </Grid>
 
 
@@ -511,8 +517,8 @@
 
                 </Grid>
 
-                
-                
+
+
             </Grid>
 
             <!-- close button -->
