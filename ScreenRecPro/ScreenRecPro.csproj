@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="view\angle-right.png" />
     <None Remove="view\bg.png" />
     <None Remove="view\cancel.ico" />
     <None Remove="view\cancel.png" />
@@ -34,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="view\angle-right.png" />
     <Resource Include="view\bg.png" />
     <Resource Include="view\cancel.ico" />
     <Resource Include="view\cancel.png" />

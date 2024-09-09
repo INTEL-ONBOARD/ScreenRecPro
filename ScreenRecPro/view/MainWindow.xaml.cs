@@ -259,12 +259,20 @@ namespace ScreenRecPro
 
                     //System.Diagnostics.Debug.WriteLine("~break out success!");
                     //System.Diagnostics.Debug.WriteLine("punch out success!");
+                    attendencePane.Visibility = Visibility.Visible;
+                    homePane.Visibility = Visibility.Hidden;
+                    addreport();
                     pauseCheck = false;
+                    
+
                 }
                 else
                 {
                     string response2 = await requestEngine.punchout();
                     if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+                    attendencePane.Visibility = Visibility.Visible;
+                    homePane.Visibility = Visibility.Hidden;
+                    addreport();
                     pauseCheck = false;
                 }
 
@@ -384,6 +392,8 @@ namespace ScreenRecPro
             {
                 loginScreen.Visibility = Visibility.Hidden;
                 welcomeScreen.Visibility = Visibility.Visible;
+                homePane.Visibility = Visibility.Visible;
+                attendencePane.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -438,6 +448,13 @@ namespace ScreenRecPro
         {
             //statusLabel.Content = "Attempting to log in again. Please wait...";
             statusLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void addreport()
+        {
+            report rp = new report();
+            reportView.Content = reportPnaelView;
+            reportPnaelView.Children.Add(rp);
         }
     }
 }

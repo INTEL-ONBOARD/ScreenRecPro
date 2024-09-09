@@ -368,7 +368,7 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Visible">
+            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Hidden">
 
                 <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
                     <!--control panel-->
@@ -487,17 +487,135 @@
 
                 </Grid>
 
-                <Grid x:Name="attendencePane" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="attendencePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
-                    <ScrollViewer x:Name="logView" Grid.Column="0" Margin="80,43,653,56" VerticalScrollBarVisibility="Hidden">
-                        <StackPanel x:Name="panelView" Width="573" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                    <ScrollViewer x:Name="reportView" Grid.Column="0" Margin="80,43,653,56" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="reportPnaelView" Width="573" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
                     </ScrollViewer>
-                    <TextBox HorizontalAlignment="Left" Margin="728,163,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="327" Height="295"/>
-                    <Label Content="Label" HorizontalAlignment="Left" Margin="728,132,0,0" VerticalAlignment="Top"/>
-                    <Button Content="Update" HorizontalAlignment="Left" Margin="1006,480,0,0" VerticalAlignment="Top" Width="52"/>
-                    <Button Content="Clear" HorizontalAlignment="Left" Margin="944,480,0,0" VerticalAlignment="Top" Width="57"/>
-                    <Label Content="4/14" HorizontalAlignment="Left" Margin="944,43,0,0" VerticalAlignment="Top" FontSize="48"/>
-                    <Label Content="Attendence Report" HorizontalAlignment="Left" Margin="935,108,0,0" VerticalAlignment="Top"/>
+
+                    <TextBox HorizontalAlignment="Left" Margin="728,156,0,0" TextWrapping="Wrap" Text="TextBox"
+         VerticalAlignment="Top" Width="514" Height="337" Padding="10">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="TextBox">
+                                            <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10">
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+
+                    <Button Content="Update" Cursor="Hand" HorizontalAlignment="Left" Margin="1165,516,0,0" VerticalAlignment="Top" Width="82" Height="25">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <!-- Default Settings -->
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Removing Default Hover Effects -->
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                                <!-- ControlTemplate for Button with CornerRadius -->
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Hover Effects -->
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+
+
+                    <Button Content="Clear" Cursor="Hand" HorizontalAlignment="Left" Margin="1099,516,0,0" VerticalAlignment="Top" Width="61" Height="25">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <!-- Default Settings -->
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Removing Default Hover Effects -->
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                                <!-- ControlTemplate for Button with CornerRadius -->
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Hover Effects -->
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Label Content="4/14" HorizontalAlignment="Left" Margin="1068,43,0,0" VerticalAlignment="Top" FontSize="48" Height="80" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                    <Label Content="Attendence Report" HorizontalAlignment="Left" Margin="1054,113,0,0" VerticalAlignment="Top" Height="29" Width="172" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
 
 
                 </Grid>
