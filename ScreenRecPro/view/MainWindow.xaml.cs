@@ -37,6 +37,7 @@ namespace ScreenRecPro
         private DispatcherTimer _timer;
         private TimeSpan _timeSpan;
         private bool _isRunning;
+        public int total = 1;
 
         List<Process> processList = new List<Process>();
         private bool multipleRunCount;
@@ -134,7 +135,7 @@ namespace ScreenRecPro
         {
             homeActive.Visibility = Visibility.Visible;
             SettingsActive.Visibility = Visibility.Hidden;
-            infoActive.Visibility = Visibility. Hidden;
+            infoActive.Visibility = Visibility.Hidden;
 
             homePane.Visibility = Visibility.Visible;
             settingsPane.Visibility = Visibility.Hidden;
@@ -177,7 +178,8 @@ namespace ScreenRecPro
 
         private async void playAction(object sender, RoutedEventArgs e)
         {
-            if (play.Visibility == Visibility.Visible) { 
+            if (play.Visibility == Visibility.Visible)
+            {
                 play.Visibility = Visibility.Hidden;
                 pause.Visibility = Visibility.Visible;
                 timerStatus.Content = "Recording";
@@ -212,10 +214,11 @@ namespace ScreenRecPro
 
         }
 
-        private async void pauseAction(object sender, RoutedEventArgs e)    
+        private async void pauseAction(object sender, RoutedEventArgs e)
         {
-            if (pause.Visibility == Visibility.Visible) {
-                pause.Visibility = Visibility.Hidden; 
+            if (pause.Visibility == Visibility.Visible)
+            {
+                pause.Visibility = Visibility.Hidden;
                 play.Visibility = Visibility.Visible;
                 timerStatus.Content = "Paused";
                 StartScreenshotProcess(false);
@@ -238,8 +241,9 @@ namespace ScreenRecPro
 
         private async void stopAction(object sender, RoutedEventArgs e)
         {
-            if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible)) { 
-                pause.Visibility = Visibility.Hidden; 
+            if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible))
+            {
+                pause.Visibility = Visibility.Hidden;
                 play.Visibility = Visibility.Visible;
                 _isRunning = false;
                 _timer.Stop();
@@ -259,11 +263,12 @@ namespace ScreenRecPro
 
                     //System.Diagnostics.Debug.WriteLine("~break out success!");
                     //System.Diagnostics.Debug.WriteLine("punch out success!");
+                    reportPnaelView.Children.Clear();
                     attendencePane.Visibility = Visibility.Visible;
                     homePane.Visibility = Visibility.Hidden;
-                    addreport();
+                    addreport(this);
                     pauseCheck = false;
-                    
+
 
                 }
                 else
@@ -272,7 +277,7 @@ namespace ScreenRecPro
                     if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
                     attendencePane.Visibility = Visibility.Visible;
                     homePane.Visibility = Visibility.Hidden;
-                    addreport();
+                    addreport(this);
                     pauseCheck = false;
                 }
 
@@ -283,13 +288,14 @@ namespace ScreenRecPro
 
         }
 
-        private void getRunnigProgramms() {
+        private void getRunnigProgramms()
+        {
             processes = Process.GetProcesses();
             if (processes.Length > 1) { multipleRunCount = true; } else { multipleRunCount = false; }
             foreach (Process p in processes)
             {
                 if (!String.IsNullOrEmpty(p.MainWindowTitle))
-                { 
+                {
                     System.Diagnostics.Debug.WriteLine(p.MainWindowTitle);
                 }
             }
@@ -305,16 +311,16 @@ namespace ScreenRecPro
             lg.setImage(data);
             panelView.Children.Add(lg);
 
-            
+
         }
 
         private async void StartScreenshotProcess(bool initialState)
         {
             isScreenshotActive = initialState;
-            Random random = new Random(); 
+            Random random = new Random();
 
-            
-            int randomIntervalSeconds = random.Next(1, 26); 
+
+            int randomIntervalSeconds = random.Next(1, 26);
             System.Diagnostics.Debug.WriteLine($"{randomIntervalSeconds} ms");
             DispatcherTimer timer = new DispatcherTimer
             {
@@ -328,11 +334,11 @@ namespace ScreenRecPro
                     string path = await TakeScreenshot();
                     update(path);
 
-                    int newRandomIntervalSeconds = random.Next(1, 26); 
+                    int newRandomIntervalSeconds = random.Next(1, 26);
                     timer.Interval = TimeSpan.FromSeconds(newRandomIntervalSeconds);
                     System.Diagnostics.Debug.WriteLine($"Next interval: {newRandomIntervalSeconds} seconds");
 
-                    
+
                 }
                 else
                 {
@@ -363,13 +369,13 @@ namespace ScreenRecPro
 
             using (Bitmap bitmap = new Bitmap(screenWidth, screenHeight))
             {
-      
+
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
                     g.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
                 }
 
-    
+
                 await Task.Run(() => bitmap.Save(filename, ImageFormat.Png));
                 System.Diagnostics.Debug.WriteLine("Saved :::::" + filename);
 
@@ -386,7 +392,7 @@ namespace ScreenRecPro
             // Assuming model.requestEngine.ValidUser() was intended to call ValidUser()
             String une = uname.Text;
             String pwdd = pwd.Password.ToString();
-            string loginResult = await model.requestEngine.logInUser(une,pwdd);
+            string loginResult = await model.requestEngine.logInUser(une, pwdd);
 
             if (loginResult == "true")
             {
@@ -450,11 +456,22 @@ namespace ScreenRecPro
             statusLabel.Visibility = Visibility.Hidden;
         }
 
-        private void addreport()
+
+        //for the daily report thing 
+        private void addreport(MainWindow win)
         {
-            report rp = new report();
             reportView.Content = reportPnaelView;
+            report rp = new report(win);
+            rp.id = "1";
+            rp.title = "";
+            rp.subtitle = "";
+            rp.input = "";
             reportPnaelView.Children.Add(rp);
+        }
+
+        private void updateData(object sender, RoutedEventArgs e)
+        {
+            foreach (var child in reportPnaelView.Children){ if (child is report rp && rp.id == infoTile.Text) { rp.Content = info_input.Text; } }
         }
     }
 }

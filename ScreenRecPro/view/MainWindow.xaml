@@ -368,7 +368,7 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Hidden">
+            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Visible">
 
                 <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
                     <!--control panel-->
@@ -487,13 +487,13 @@
 
                 </Grid>
 
-                <Grid x:Name="attendencePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="attendencePane" Visibility="Visible" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <ScrollViewer x:Name="reportView" Grid.Column="0" Margin="80,43,653,56" VerticalScrollBarVisibility="Hidden">
                         <StackPanel x:Name="reportPnaelView" Width="573" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
                     </ScrollViewer>
 
-                    <TextBox HorizontalAlignment="Left" Margin="728,156,0,0" TextWrapping="Wrap" Text="Fill out this feild...."
+                    <TextBox x:Name="info_input" HorizontalAlignment="Left" Margin="728,156,0,0" TextWrapping="Wrap" Text="Fill out this feild...."
          VerticalAlignment="Top" Width="514" Height="337" Padding="10" Foreground="#FF797979">
                         <TextBox.Style>
                             <Style TargetType="TextBox">
@@ -514,7 +514,7 @@
                     </TextBox>
 
 
-                    <Button Content="Update" Cursor="Hand" HorizontalAlignment="Left" Margin="1165,516,0,0" VerticalAlignment="Top" Width="82" Height="25">
+                    <Button x:Name="info_updateBtn" Content="Update" Cursor="Hand" HorizontalAlignment="Left" Margin="1165,516,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="updateData">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <!-- Default Settings -->
@@ -565,7 +565,7 @@
 
 
 
-                    <Button Content="Clear" Cursor="Hand" HorizontalAlignment="Left" Margin="1099,516,0,0" VerticalAlignment="Top" Width="61" Height="25">
+                    <Button x:Name="info_clearBtn" Content="Clear" Cursor="Hand" HorizontalAlignment="Left" Margin="1099,516,0,0" VerticalAlignment="Top" Width="61" Height="25">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <!-- Default Settings -->
@@ -614,9 +614,9 @@
                         </Button.Style>
                     </Button>
 
-                    <Label Content="4/14" HorizontalAlignment="Left" Margin="1068,35,0,0" VerticalAlignment="Top" FontSize="48" Height="80" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-                    <Label Content="Attendence Report" HorizontalAlignment="Left" Margin="1058,96,0,0" VerticalAlignment="Top" Height="29" Width="172" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"/>
-                    <Label Content="Please fill out what you have done in the provided time frame" HorizontalAlignment="Left" Margin="880,115,0,0" VerticalAlignment="Top" Height="29" Width="350" VerticalContentAlignment="Center" HorizontalContentAlignment="Right">
+                    <Label x:Name="info_count" Content="4/14" HorizontalAlignment="Left" Margin="1068,35,0,0" VerticalAlignment="Top" FontSize="48" Height="80" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                    <Label x:Name="info_title" Content="Attendence Report" HorizontalAlignment="Left" Margin="1058,96,0,0" VerticalAlignment="Top" Height="29" Width="172" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"/>
+                    <Label x:Name="info_subtitle" Content="Please fill out what you have done in the provided time frame" HorizontalAlignment="Left" Margin="880,115,0,0" VerticalAlignment="Top" Height="29" Width="350" VerticalContentAlignment="Center" HorizontalContentAlignment="Right">
                         <Label.Foreground>
                             <SolidColorBrush Color="Black" Opacity="0.596"/>
                         </Label.Foreground>
