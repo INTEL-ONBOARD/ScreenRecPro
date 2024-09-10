@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ScreenRecPro.view"
-             mc:Ignorable="d" d:DesignWidth="573" Height="80">
+             mc:Ignorable="d" d:DesignWidth="573" Height="80" Margin="0,0,0,10">
 
     <UserControl.Resources>
         <!-- Button Style -->
@@ -52,32 +52,40 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Border Style with Hover Effect -->
+        <Style x:Key="borderWithHoverEffect" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="#99000000" Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="#FFC1C1C1" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
-    <!-- Single Border with hover effect -->
-    <Border BorderThickness="1" CornerRadius="10" Background="White" Cursor="Hand">
-        <Border.BorderBrush>
-            <SolidColorBrush Color="#99000000" Opacity="0.6"/>
-        </Border.BorderBrush>
-        <Border.Style>
-            <Style TargetType="Border">
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="Gray"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </Border.Style>
-
-        <Grid Margin="0,0,0,-1" >
+    <!-- Apply the Style to the Border -->
+    <Border Style="{StaticResource borderWithHoverEffect}" Cursor="Hand">
+        <Grid Margin="0,0,0,-1">
             <Button x:Name="Home" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Left" Margin="512,0,0,0" 
                     Cursor="Hand" VerticalAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}" 
                     Width="38" Height="34" Background="{x:Null}">
-                <Image Source="/view/angle-right.png" />
+                <Image Source="/view/angle-right.png" Width="37"/>
             </Button>
-            <Label Content="Hour Report" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" FontSize="22"/>
-            <Label Content="00:00 - 00:00" HorizontalAlignment="Left" Margin="31,41,0,0" VerticalAlignment="Top"/>
+            <Label Content="Hour Report" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" FontSize="22"/>
+            <Label Content="00:00 - 00:00" HorizontalAlignment="Left" Margin="26,41,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Border>
-
 </UserControl>
