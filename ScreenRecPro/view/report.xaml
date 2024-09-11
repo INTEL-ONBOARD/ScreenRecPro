@@ -84,7 +84,7 @@
                     Width="38" Height="34" Background="{x:Null}">
                 <Image Source="/view/angle-right.png" Width="37"/>
             </Button>
-            <Label Content="Hour Report" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" FontSize="22"/>
+            <Label Content="{Binding title}" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" FontSize="22"/>
             <Label Content="00:00 - 00:00" HorizontalAlignment="Left" Margin="26,41,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Border>

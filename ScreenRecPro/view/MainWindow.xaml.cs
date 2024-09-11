@@ -463,10 +463,20 @@ namespace ScreenRecPro
             reportView.Content = reportPnaelView;
             report rp = new report(win);
             rp.id = "1";
-            rp.title = "";
-            rp.subtitle = "";
+            rp.title = "Daily Report";
+            rp.subtitle = "Please fill out what you have done in the provided time frame";
             rp.input = "";
             reportPnaelView.Children.Add(rp);
+
+            report rp1 = new report(win);
+            rp1.id = "2";
+            rp1.title = "Hour Report";
+            rp1.subtitle = "Please fill out what you have done in the provided time frame";
+            rp1.input = "";
+            reportPnaelView.Children.Add(rp1);
+            total = reportPnaelView.Children.Count;
+
+
         }
 
         private void updateData(object sender, RoutedEventArgs e)

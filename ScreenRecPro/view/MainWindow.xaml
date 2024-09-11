@@ -614,9 +614,9 @@
                         </Button.Style>
                     </Button>
 
-                    <Label Visibility="Hidden"  x:Name="info_count" Content="4/14" HorizontalAlignment="Left" Margin="1068,35,0,0" VerticalAlignment="Top" FontSize="48" Height="80" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-                    <Label Visibility="Hidden" x:Name="info_title" Content="Attendence Report" HorizontalAlignment="Left" Margin="1058,96,0,0" VerticalAlignment="Top" Height="29" Width="172" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"/>
-                    <Label Visibility="Hidden" x:Name="info_subtitle" Content="Please fill out what you have done in the provided time frame" HorizontalAlignment="Left" Margin="880,115,0,0" VerticalAlignment="Top" Height="29" Width="350" VerticalContentAlignment="Center" HorizontalContentAlignment="Right">
+                    <Label Visibility="Hidden"  x:Name="info_count" Content="4/14" HorizontalAlignment="Left" Margin="1068,31,0,0" VerticalAlignment="Top" FontSize="48" Height="80" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                    <Label Visibility="Hidden" x:Name="info_title" Content="Attendence Report" HorizontalAlignment="Left" Margin="1058,96,0,0" VerticalAlignment="Top" Height="32" Width="172" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"/>
+                    <Label Visibility="Hidden" x:Name="info_subtitle" Content="Please fill out what you have done in the provided time frame" HorizontalAlignment="Left" Margin="880,123,0,0" VerticalAlignment="Top" Height="29" Width="350" VerticalContentAlignment="Center" HorizontalContentAlignment="Right">
                         <Label.Foreground>
                             <SolidColorBrush Color="Black" Opacity="0.596"/>
                         </Label.Foreground>
