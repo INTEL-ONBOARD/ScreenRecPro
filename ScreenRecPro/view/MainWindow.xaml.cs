@@ -244,6 +244,17 @@ namespace ScreenRecPro
             if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible))
             {
                 pause.Visibility = Visibility.Hidden;
+                Settings.IsEnabled = false;
+                information.IsEnabled = false;
+                logoutBtn.IsEnabled = false;
+
+                info_count.Visibility = Visibility.Hidden;
+                info_title.Visibility = Visibility.Hidden;
+                info_subtitle.Visibility = Visibility.Hidden;
+                info_input.Visibility = Visibility.Hidden;
+                info_updateBtn.Visibility = Visibility.Hidden;
+                info_clearBtn.Visibility = Visibility.Hidden;
+
                 play.Visibility = Visibility.Visible;
                 _isRunning = false;
                 _timer.Stop();
@@ -569,6 +580,9 @@ namespace ScreenRecPro
                 System.Diagnostics.Debug.WriteLine("Punch out success!"); 
                 attendencePaneDone.Visibility = Visibility.Hidden;
                 homePane.Visibility = Visibility.Visible;
+                Settings.IsEnabled = true;
+                information.IsEnabled = true;
+                logoutBtn.IsEnabled = true;
                 reportPnaelView.Children.Clear();
             }
             else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }

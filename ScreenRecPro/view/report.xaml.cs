@@ -37,6 +37,7 @@ namespace ScreenRecPro.view
 
         private void active(object sender, MouseButtonEventArgs e)
         {
+            window.defaultInfo.Visibility = Visibility.Hidden;
             window.info_count.Visibility = Visibility.Visible;
             window.info_title.Visibility = Visibility.Visible;
             window.info_subtitle.Visibility = Visibility.Visible;

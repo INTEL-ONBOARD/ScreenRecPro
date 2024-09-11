@@ -369,7 +369,7 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Hidden">
+            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Visible">
 
                 <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
                     <!--control panel-->
@@ -433,7 +433,7 @@
 
                 </Grid>
 
-                <Grid x:Name="homePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="homePane" Visibility="Visible" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <Button x:Name="play" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,670,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="playAction" Background="{x:Null}">
                         <Image x:Name="src1" Source="/view/play.png" RenderTransformOrigin="-4.281,2.969" />
@@ -443,10 +443,12 @@
                         <Image x:Name="src2" Source="/view/pause.png" RenderTransformOrigin="-4.281,2.969" />
                     </Button>
 
-                    <Button x:Name="stop" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,455,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="stopAction" Background="{x:Null}">
+                    <Button x:Name="stop" Visibility="Hidden" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,455,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="stopAction" Background="{x:Null}">
                         <Image x:Name="src3" Source="/view/stop.png" RenderTransformOrigin="-4.281,2.969" />
                     </Button>
 
+                    
+                    
                     <Rectangle HorizontalAlignment="Left" Height="106" Margin="673,403,0,0" VerticalAlignment="Top" Width="2">
                         <Rectangle.Fill>
                             <SolidColorBrush Color="Black" Opacity="0.6"/>
@@ -622,6 +624,14 @@
                             <SolidColorBrush Color="Black" Opacity="0.596"/>
                         </Label.Foreground>
                     </Label>
+                    <Grid x:Name="defaultInfo" Margin="653,43,59,53">
+                        <Image HorizontalAlignment="Center" Height="100" Margin="0,93,0,0" VerticalAlignment="Top" Width="100" Source="/view/select.png"/>
+                        <Label Content="Daily Work Report Submission" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="Gray"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,284,0,0" TextWrapping="Wrap" Text="Before you leave for the day, please take a moment to submit a brief summary of your completed tasks. This report will help us track daily progress and ensure smooth workflow management. Simply enter the details of your work into the form below, and click 'Complete' to finish your report for today." VerticalAlignment="Top" TextAlignment="Center" Width="392" Foreground="#FFC1C1C1"/>
+
+                    </Grid>
+
+
 
 
                 </Grid>
