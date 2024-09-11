@@ -234,7 +234,7 @@ namespace ScreenRecPro.model
             }
         }
 
-        public static async Task<string> Punchout(string dailyReport, int type, bool isDefault, Dictionary<string, string> additionalFormData = null)
+        public static async Task<string> punchout(int type, bool isDefault, Dictionary<string, string> additionalFormData = null)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -245,14 +245,14 @@ namespace ScreenRecPro.model
                 try
                 {
                     // Adjust the dailyReport based on the isDefault parameter
-                    string adjustedDailyReport = isDefault ? "yes it's me" : dailyReport;
+
 
                     // Create form data
                     var formData = new Dictionary<string, string>
-            {
-                { "type", type.ToString() },
-                { "daily_report", adjustedDailyReport }
-            };
+                    {
+                        { "type", type.ToString() },
+
+                    };
 
                     // Add additional form data if isDefault is false
                     if (!isDefault && additionalFormData != null)
@@ -264,7 +264,11 @@ namespace ScreenRecPro.model
                     }
 
                     var content = new FormUrlEncodedContent(formData);
+                    // Read the content as a string for debugging
+                    string contentString = await content.ReadAsStringAsync();
 
+                    System.Diagnostics.Debug.WriteLine("+++++++++++++++++++");
+                    System.Diagnostics.Debug.WriteLine(contentString);
                     HttpResponseMessage myHttpResponse = await client.PostAsync("/api/v1/attendance", content);
 
                     System.Diagnostics.Debug.WriteLine("---------------------------------------------------");

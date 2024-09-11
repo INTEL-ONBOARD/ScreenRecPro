@@ -257,10 +257,6 @@ namespace ScreenRecPro
                 {
                     string response1 = await requestEngine.breakout();
                     if (response1 == "true") { System.Diagnostics.Debug.WriteLine("break out success!"); } else { System.Diagnostics.Debug.WriteLine("break out faild!"); }
-
-                    string response2 = await requestEngine.punchout();
-                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
-
                     //System.Diagnostics.Debug.WriteLine("~break out success!");
                     //System.Diagnostics.Debug.WriteLine("punch out success!");
                     reportPnaelView.Children.Clear();
@@ -273,8 +269,6 @@ namespace ScreenRecPro
                 }
                 else
                 {
-                    string response2 = await requestEngine.punchout();
-                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
                     attendencePane.Visibility = Visibility.Visible;
                     homePane.Visibility = Visibility.Hidden;
                     addreport(this);
@@ -525,11 +519,46 @@ namespace ScreenRecPro
 
         }
 
-        private void uploadBtn(object sender, RoutedEventArgs e)
+        private  async void uploadBtn(object sender, RoutedEventArgs e)
         {
             completeReportBtn.Visibility = Visibility.Hidden;
             attendencePane.Visibility = Visibility.Hidden;
             attendencePaneDone.Visibility = Visibility.Visible;
+
+
+            Dictionary<string, string> additionalFormData = new Dictionary<string, string>();
+
+            int hourlyReportIndex = 0; // Index for hourly_report
+
+            foreach (var child in reportPnaelView.Children)
+            {
+                if (child is report rp)
+                {
+                    // Check if the ID is equal to 1
+                    if (rp.id == "1")
+                    {
+                        additionalFormData["daily_report"] = rp.input;
+                        System.Diagnostics.Debug.WriteLine("ID 1 found");
+                        System.Diagnostics.Debug.WriteLine("Updated");
+                    }
+                    else
+                    {
+                        // Construct the key for hourly_report
+                        string hourKey = $"hourly_report[{hourlyReportIndex}][hour]";
+                        string reportKey = $"hourly_report[{hourlyReportIndex}][report]";
+
+                        // Add the data to the dictionary
+                        additionalFormData[hourKey] = rp.id.ToString(); // Assuming rp.id is the hour value
+                        additionalFormData[reportKey] = rp.input;
+
+                        hourlyReportIndex++; // Increment the index for the next hourly report
+                    }
+                }
+            }
+
+            string response2 = await requestEngine.punchout(4,false , additionalFormData);
+            if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+
         }
     }
 }
