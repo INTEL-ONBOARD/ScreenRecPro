@@ -674,16 +674,18 @@
                             <!-- Button Background -->
                             <Border x:Name="buttonBackground"
                         CornerRadius="10"
-                        Background="#FF2EC535"
                         Padding="10,10,20,10"
                         BorderBrush="Transparent"
                         BorderThickness="0"
                         Margin="0,0,87,35"
                         RenderTransformOrigin="0.5,0.5">
+                                <Border.Background>
+                                    <SolidColorBrush Color="#FF64CC5E" Opacity="1"/>
+                                </Border.Background>
                                 <!-- Grid for the button's content -->
                                 <Grid>
                                     <!-- Left Bright Color Line -->
-                                    <Border Background="#FF3CF533"
+                                    <Border Background="#FF88E882"
                                 Width="58"
                                 HorizontalAlignment="Left"
                                 CornerRadius="10,0,0,10"

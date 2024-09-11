@@ -451,6 +451,8 @@ namespace ScreenRecPro
         }
 
 
+
+
         //for the daily report thing 
         private void addreport(MainWindow win)
         {
@@ -529,10 +531,10 @@ namespace ScreenRecPro
 
         private  async void uploadBtn(object sender, RoutedEventArgs e)
         {
+
             completeReportBtn.Visibility = Visibility.Hidden;
             attendencePane.Visibility = Visibility.Hidden;
             attendencePaneDone.Visibility = Visibility.Visible;
-
 
             Dictionary<string, string> additionalFormData = new Dictionary<string, string>();
 
@@ -565,7 +567,13 @@ namespace ScreenRecPro
             }
 
             string response2 = await requestEngine.punchout(4,false , additionalFormData);
-            if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+            if (response2 == "true") { 
+                System.Diagnostics.Debug.WriteLine("Punch out success!"); 
+                attendencePaneDone.Visibility = Visibility.Hidden;
+                homePane.Visibility = Visibility.Visible;
+                reportPnaelView.Children.Clear();
+            }
+            else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
 
         }
     }
