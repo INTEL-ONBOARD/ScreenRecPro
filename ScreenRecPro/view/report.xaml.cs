@@ -45,6 +45,9 @@ namespace ScreenRecPro.view
             window.info_clearBtn.Visibility = Visibility.Visible;
 
             window.info_count.Content = (id +"/"+ window.total);
+
+
+            System.Diagnostics.Debug.WriteLine(this.id + this .title + " " + this.subtitle+"-"+ this.input);
         }
     }
 }

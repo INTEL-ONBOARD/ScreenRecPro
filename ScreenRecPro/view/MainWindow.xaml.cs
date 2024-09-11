@@ -471,7 +471,24 @@ namespace ScreenRecPro
 
         private void updateData(object sender, RoutedEventArgs e)
         {
-            foreach (var child in reportPnaelView.Children){ if (child is report rp && rp.id == infoTile.Text) { rp.Content = info_input.Text; } }
+
+                foreach (var child in reportPnaelView.Children)
+                {
+                    if (child is report rp)
+                    {
+                        if (rp.id == "1")
+                        {
+                            System.Diagnostics.Debug.WriteLine("id found ");
+                        }
+                        System.Diagnostics.Debug.WriteLine("updated");
+                        rp.input = info_input.Text;
+
+                    }
+                }
+
+
+
         }
+
     }
 }
