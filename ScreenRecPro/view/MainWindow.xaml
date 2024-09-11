@@ -368,7 +368,7 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Visible">
+            <Grid x:Name="welcomeScreen" Margin="38,91,36,43" Visibility="Hidden">
 
                 <Grid HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="1306">
                     <!--control panel-->
@@ -487,7 +487,7 @@
 
                 </Grid>
 
-                <Grid x:Name="attendencePane" Visibility="Visible" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="attendencePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <ScrollViewer x:Name="reportView" Grid.Column="0" Margin="80,43,653,56" VerticalScrollBarVisibility="Hidden">
                         <StackPanel x:Name="reportPnaelView" Width="573" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
