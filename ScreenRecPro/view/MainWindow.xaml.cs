@@ -471,24 +471,29 @@ namespace ScreenRecPro
 
         private void updateData(object sender, RoutedEventArgs e)
         {
+            if (info_count.Content != null) 
+            {
+                string infoCountText = info_count.Content.ToString();
+
+
+                string infoCountId = infoCountText.Split('/')[0];
 
                 foreach (var child in reportPnaelView.Children)
                 {
                     if (child is report rp)
                     {
-                        if (rp.id == "1")
+                        if (rp.id.Equals(infoCountId))
                         {
-                            System.Diagnostics.Debug.WriteLine("id found ");
+                            System.Diagnostics.Debug.WriteLine("ID found");
+                            System.Diagnostics.Debug.WriteLine("Updated");
+                            rp.input = info_input.Text; 
                         }
-                        System.Diagnostics.Debug.WriteLine("updated");
-                        rp.input = info_input.Text;
-
                     }
                 }
-
-
-
+            }
+            System.Diagnostics.Debug.WriteLine("running");
         }
+
 
     }
 }
