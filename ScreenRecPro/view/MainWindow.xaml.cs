@@ -462,13 +462,21 @@ namespace ScreenRecPro
             rp.input = "";
             reportPnaelView.Children.Add(rp);
 
-            report rp1 = new report(win);
-            rp1.id = "2";
-            rp1.title = "Hour Report";
-            rp1.subtitle = "Please fill out what you have done in the provided time frame";
-            rp1.input = "";
-            reportPnaelView.Children.Add(rp1);
-            total = reportPnaelView.Children.Count;
+            //report rp1 = new report(win);
+            //rp1.id = "2";
+            //rp1.title = "Hour Report";
+            //rp1.subtitle = "Please fill out what you have done in the provided time frame";
+            //rp1.input = "";
+            //reportPnaelView.Children.Add(rp1);
+            //total = reportPnaelView.Children.Count;
+
+            //report rp3 = new report(win);
+            //rp3.id = "3";
+            //rp3.title = "Hour Report";
+            //rp3.subtitle = "Please fill out what you have done in the provided time frame";
+            //rp3.input = "";
+            //reportPnaelView.Children.Add(rp3);
+            //total = reportPnaelView.Children.Count;
 
 
         }
