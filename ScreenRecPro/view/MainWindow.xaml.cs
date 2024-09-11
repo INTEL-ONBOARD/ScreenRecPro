@@ -451,8 +451,6 @@ namespace ScreenRecPro
         }
 
 
-
-
         //for the daily report thing 
         private void addreport(MainWindow win)
         {
