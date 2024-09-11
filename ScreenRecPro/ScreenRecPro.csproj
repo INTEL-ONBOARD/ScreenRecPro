@@ -15,7 +15,9 @@
     <None Remove="view\cancel.png" />
     <None Remove="view\cancel.svg" />
     <None Remove="view\comment-info %281%29.png" />
+    <None Remove="view\cursor-finger.png" />
     <None Remove="view\house-chimney-blank.png" />
+    <None Remove="view\interactive.png" />
     <None Remove="view\loading.gif" />
     <None Remove="view\logo.jpg" />
     <None Remove="view\logout.png" />
@@ -41,7 +43,9 @@
     <Resource Include="view\cancel.png" />
     <Resource Include="view\cancel.svg" />
     <Resource Include="view\comment-info (1).png" />
+    <Resource Include="view\cursor-finger.png" />
     <Resource Include="view\house-chimney-blank.png" />
+    <Resource Include="view\interactive.png" />
     <Resource Include="view\loading.gif" />
     <Resource Include="view\logo.jpg" />
     <Resource Include="view\logout.png" />

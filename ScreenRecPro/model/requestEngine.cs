@@ -233,7 +233,9 @@ namespace ScreenRecPro.model
                 }
             }
         }
-        public static async Task<string> punchout() {
+
+        public static async Task<string> Punchout(string dailyReport, int type, bool isDefault, Dictionary<string, string> additionalFormData = null)
+        {
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://2pm.revostack.com");
@@ -242,12 +244,24 @@ namespace ScreenRecPro.model
 
                 try
                 {
+                    // Adjust the dailyReport based on the isDefault parameter
+                    string adjustedDailyReport = isDefault ? "yes it's me" : dailyReport;
+
                     // Create form data
                     var formData = new Dictionary<string, string>
+            {
+                { "type", type.ToString() },
+                { "daily_report", adjustedDailyReport }
+            };
+
+                    // Add additional form data if isDefault is false
+                    if (!isDefault && additionalFormData != null)
                     {
-                        { "type", "4" },
-                        { "daily_report", "test report..." }
-                    };
+                        foreach (var kvp in additionalFormData)
+                        {
+                            formData[kvp.Key] = kvp.Value;
+                        }
+                    }
 
                     var content = new FormUrlEncodedContent(formData);
 
@@ -275,7 +289,7 @@ namespace ScreenRecPro.model
             }
         }
 
-        //1 = punchin, 2 = breakin, 3 = breakout, 4 = punchout
+
 
     }
 }

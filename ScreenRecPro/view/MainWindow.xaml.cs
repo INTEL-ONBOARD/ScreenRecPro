@@ -481,7 +481,7 @@ namespace ScreenRecPro
 
         private void updateData(object sender, RoutedEventArgs e)
         {
-            if (info_count.Content != null) 
+            if (info_count.Content != null)
             {
                 string infoCountText = info_count.Content.ToString();
 
@@ -496,14 +496,40 @@ namespace ScreenRecPro
                         {
                             System.Diagnostics.Debug.WriteLine("ID found");
                             System.Diagnostics.Debug.WriteLine("Updated");
-                            rp.input = info_input.Text; 
+                            rp.input = info_input.Text;
                         }
                     }
                 }
             }
-            System.Diagnostics.Debug.WriteLine("running");
+
+            bool checkMark = false;
+
+            foreach (var child in reportPnaelView.Children)
+            {
+                if (child is report rp)
+                {
+                    if (rp.input.Equals(""))
+                    {
+                       checkMark = true;
+                    }
+                }
+            }
+
+            if (!checkMark) {
+                completeReportBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                completeReportBtn.Visibility = Visibility.Hidden;
+            }
+
         }
 
-
+        private void uploadBtn(object sender, RoutedEventArgs e)
+        {
+            completeReportBtn.Visibility = Visibility.Hidden;
+            attendencePane.Visibility = Visibility.Hidden;
+            attendencePaneDone.Visibility = Visibility.Visible;
+        }
     }
 }
