@@ -9,20 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="view\angle-right.png" />
     <None Remove="view\bg.png" />
     <None Remove="view\cancel.ico" />
     <None Remove="view\cancel.png" />
     <None Remove="view\cancel.svg" />
     <None Remove="view\comment-info %281%29.png" />
+    <None Remove="view\cursor-finger.png" />
     <None Remove="view\house-chimney-blank.png" />
+    <None Remove="view\interactive.png" />
     <None Remove="view\loading.gif" />
     <None Remove="view\logo.jpg" />
     <None Remove="view\logout.png" />
     <None Remove="view\minimize.png" />
     <None Remove="view\pause.png" />
     <None Remove="view\play.png" />
+    <None Remove="view\select.png" />
     <None Remove="view\settings %283%29.png" />
     <None Remove="view\stop.png" />
+    <None Remove="view\waving-hand.png" />
     <None Remove="view\World-Map.png" />
   </ItemGroup>
 
@@ -34,20 +39,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="view\angle-right.png" />
     <Resource Include="view\bg.png" />
     <Resource Include="view\cancel.ico" />
     <Resource Include="view\cancel.png" />
     <Resource Include="view\cancel.svg" />
     <Resource Include="view\comment-info (1).png" />
+    <Resource Include="view\cursor-finger.png" />
     <Resource Include="view\house-chimney-blank.png" />
+    <Resource Include="view\interactive.png" />
     <Resource Include="view\loading.gif" />
     <Resource Include="view\logo.jpg" />
     <Resource Include="view\logout.png" />
     <Resource Include="view\minimize.png" />
     <Resource Include="view\pause.png" />
     <Resource Include="view\play.png" />
+    <Resource Include="view\select.png" />
     <Resource Include="view\settings (3).png" />
     <Resource Include="view\stop.png" />
+    <Resource Include="view\waving-hand.png" />
     <Resource Include="view\World-Map.png" />
   </ItemGroup>
 

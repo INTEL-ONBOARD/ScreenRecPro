@@ -73,7 +73,6 @@ namespace ScreenRecPro.model
                 }
             }
         }
-
         public static async Task<string> logOutUser()
         {
 
@@ -110,7 +109,6 @@ namespace ScreenRecPro.model
                 }
             }
         }
-
         public static async Task<string> punchin()
         {
             using (HttpClient client = new HttpClient())
@@ -235,7 +233,9 @@ namespace ScreenRecPro.model
                 }
             }
         }
-        public static async Task<string> punchout() {
+
+        public static async Task<string> punchout(int type, bool isDefault, Dictionary<string, string> additionalFormData = null)
+        {
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://2pm.revostack.com");
@@ -244,15 +244,31 @@ namespace ScreenRecPro.model
 
                 try
                 {
+                    // Adjust the dailyReport based on the isDefault parameter
+
+
                     // Create form data
                     var formData = new Dictionary<string, string>
                     {
-                        { "type", "4" },
-                        { "daily_report", "test report..." }
+                        { "type", type.ToString() },
+
                     };
 
-                    var content = new FormUrlEncodedContent(formData);
+                    // Add additional form data if isDefault is false
+                    if (!isDefault && additionalFormData != null)
+                    {
+                        foreach (var kvp in additionalFormData)
+                        {
+                            formData[kvp.Key] = kvp.Value;
+                        }
+                    }
 
+                    var content = new FormUrlEncodedContent(formData);
+                    // Read the content as a string for debugging
+                    string contentString = await content.ReadAsStringAsync();
+
+                    System.Diagnostics.Debug.WriteLine("+++++++++++++++++++");
+                    System.Diagnostics.Debug.WriteLine(contentString);
                     HttpResponseMessage myHttpResponse = await client.PostAsync("/api/v1/attendance", content);
 
                     System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
@@ -277,7 +293,7 @@ namespace ScreenRecPro.model
             }
         }
 
-        //1 = punchin, 2 = breakin, 3 = breakout, 4 = punchout
+
 
     }
 }

@@ -37,6 +37,7 @@ namespace ScreenRecPro
         private DispatcherTimer _timer;
         private TimeSpan _timeSpan;
         private bool _isRunning;
+        public int total = 1;
 
         List<Process> processList = new List<Process>();
         private bool multipleRunCount;
@@ -134,7 +135,7 @@ namespace ScreenRecPro
         {
             homeActive.Visibility = Visibility.Visible;
             SettingsActive.Visibility = Visibility.Hidden;
-            infoActive.Visibility = Visibility. Hidden;
+            infoActive.Visibility = Visibility.Hidden;
 
             homePane.Visibility = Visibility.Visible;
             settingsPane.Visibility = Visibility.Hidden;
@@ -177,9 +178,12 @@ namespace ScreenRecPro
 
         private async void playAction(object sender, RoutedEventArgs e)
         {
-            if (play.Visibility == Visibility.Visible) { 
+            if (play.Visibility == Visibility.Visible)
+            {
                 play.Visibility = Visibility.Hidden;
                 pause.Visibility = Visibility.Visible;
+                welcomeBox.Visibility = Visibility.Hidden;
+                stop.Visibility = Visibility.Visible;
                 timerStatus.Content = "Recording";
 
                 getRunnigProgramms();
@@ -212,10 +216,11 @@ namespace ScreenRecPro
 
         }
 
-        private async void pauseAction(object sender, RoutedEventArgs e)    
+        private async void pauseAction(object sender, RoutedEventArgs e)
         {
-            if (pause.Visibility == Visibility.Visible) {
-                pause.Visibility = Visibility.Hidden; 
+            if (pause.Visibility == Visibility.Visible)
+            {
+                pause.Visibility = Visibility.Hidden;
                 play.Visibility = Visibility.Visible;
                 timerStatus.Content = "Paused";
                 StartScreenshotProcess(false);
@@ -238,8 +243,20 @@ namespace ScreenRecPro
 
         private async void stopAction(object sender, RoutedEventArgs e)
         {
-            if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible)) { 
-                pause.Visibility = Visibility.Hidden; 
+            if ((pause.Visibility == Visibility.Visible && play.Visibility == Visibility.Hidden) || (pause.Visibility == Visibility.Hidden && play.Visibility == Visibility.Visible))
+            {
+                pause.Visibility = Visibility.Hidden;
+                Settings.IsEnabled = false;
+                information.IsEnabled = false;
+                logoutBtn.IsEnabled = false;
+
+                info_count.Visibility = Visibility.Hidden;
+                info_title.Visibility = Visibility.Hidden;
+                info_subtitle.Visibility = Visibility.Hidden;
+                info_input.Visibility = Visibility.Hidden;
+                info_updateBtn.Visibility = Visibility.Hidden;
+                info_clearBtn.Visibility = Visibility.Hidden;
+
                 play.Visibility = Visibility.Visible;
                 _isRunning = false;
                 _timer.Stop();
@@ -253,19 +270,25 @@ namespace ScreenRecPro
                 {
                     string response1 = await requestEngine.breakout();
                     if (response1 == "true") { System.Diagnostics.Debug.WriteLine("break out success!"); } else { System.Diagnostics.Debug.WriteLine("break out faild!"); }
-
-                    string response2 = await requestEngine.punchout();
-                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
-
                     //System.Diagnostics.Debug.WriteLine("~break out success!");
                     //System.Diagnostics.Debug.WriteLine("punch out success!");
+                    reportPnaelView.Children.Clear();
+                    attendencePane.Visibility = Visibility.Visible;
+                    homePane.Visibility = Visibility.Hidden;
+                    addreport(this);
                     pauseCheck = false;
+
+                    welcomeBox.Visibility = Visibility.Visible;
+                    stop.Visibility = Visibility.Hidden;
                 }
                 else
                 {
-                    string response2 = await requestEngine.punchout();
-                    if (response2 == "true") { System.Diagnostics.Debug.WriteLine("Punch out success!"); } else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+                    attendencePane.Visibility = Visibility.Visible;
+                    homePane.Visibility = Visibility.Hidden;
+                    addreport(this);
                     pauseCheck = false;
+                    welcomeBox.Visibility = Visibility.Visible;
+                    stop.Visibility = Visibility.Hidden;
                 }
 
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
@@ -275,13 +298,14 @@ namespace ScreenRecPro
 
         }
 
-        private void getRunnigProgramms() {
+        private void getRunnigProgramms()
+        {
             processes = Process.GetProcesses();
             if (processes.Length > 1) { multipleRunCount = true; } else { multipleRunCount = false; }
             foreach (Process p in processes)
             {
                 if (!String.IsNullOrEmpty(p.MainWindowTitle))
-                { 
+                {
                     System.Diagnostics.Debug.WriteLine(p.MainWindowTitle);
                 }
             }
@@ -297,16 +321,16 @@ namespace ScreenRecPro
             lg.setImage(data);
             panelView.Children.Add(lg);
 
-            
+
         }
 
         private async void StartScreenshotProcess(bool initialState)
         {
             isScreenshotActive = initialState;
-            Random random = new Random(); 
+            Random random = new Random();
 
-            
-            int randomIntervalSeconds = random.Next(1, 26); 
+
+            int randomIntervalSeconds = random.Next(1, 26);
             System.Diagnostics.Debug.WriteLine($"{randomIntervalSeconds} ms");
             DispatcherTimer timer = new DispatcherTimer
             {
@@ -320,11 +344,11 @@ namespace ScreenRecPro
                     string path = await TakeScreenshot();
                     update(path);
 
-                    int newRandomIntervalSeconds = random.Next(1, 26); 
+                    int newRandomIntervalSeconds = random.Next(1, 26);
                     timer.Interval = TimeSpan.FromSeconds(newRandomIntervalSeconds);
                     System.Diagnostics.Debug.WriteLine($"Next interval: {newRandomIntervalSeconds} seconds");
 
-                    
+
                 }
                 else
                 {
@@ -355,13 +379,13 @@ namespace ScreenRecPro
 
             using (Bitmap bitmap = new Bitmap(screenWidth, screenHeight))
             {
-      
+
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
                     g.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
                 }
 
-    
+
                 await Task.Run(() => bitmap.Save(filename, ImageFormat.Png));
                 System.Diagnostics.Debug.WriteLine("Saved :::::" + filename);
 
@@ -378,12 +402,14 @@ namespace ScreenRecPro
             // Assuming model.requestEngine.ValidUser() was intended to call ValidUser()
             String une = uname.Text;
             String pwdd = pwd.Password.ToString();
-            string loginResult = await model.requestEngine.logInUser(une,pwdd);
+            string loginResult = await model.requestEngine.logInUser(une, pwdd);
 
             if (loginResult == "true")
             {
                 loginScreen.Visibility = Visibility.Hidden;
                 welcomeScreen.Visibility = Visibility.Visible;
+                homePane.Visibility = Visibility.Visible;
+                attendencePane.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -421,6 +447,15 @@ namespace ScreenRecPro
 
                 loginScreen.Visibility = Visibility.Visible;
                 welcomeScreen.Visibility = Visibility.Hidden;
+                welcomeBox.Visibility = Visibility.Visible;
+                stop.Visibility = Visibility.Hidden;
+
+                homePane.Visibility = Visibility.Visible;
+                infoPane.Visibility = Visibility.Hidden;
+                settingsPane.Visibility = Visibility.Hidden;
+                homeActive.Visibility = Visibility.Visible;
+                SettingsActive.Visibility = Visibility.Hidden;
+                infoActive.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -438,6 +473,134 @@ namespace ScreenRecPro
         {
             //statusLabel.Content = "Attempting to log in again. Please wait...";
             statusLabel.Visibility = Visibility.Hidden;
+        }
+
+
+        //for the daily report thing 
+        private void addreport(MainWindow win)
+        {
+            reportView.Content = reportPnaelView;
+            report rp = new report(win);
+            rp.id = "1";
+            rp.title = "Daily Report";
+            rp.subtitle = "Please fill out what you have done in the provided time frame";
+            rp.input = "";
+            reportPnaelView.Children.Add(rp);
+
+            //report rp1 = new report(win);
+            //rp1.id = "2";
+            //rp1.title = "Hour Report";
+            //rp1.subtitle = "Please fill out what you have done in the provided time frame";
+            //rp1.input = "";
+            //reportPnaelView.Children.Add(rp1);
+            //total = reportPnaelView.Children.Count;
+
+            //report rp3 = new report(win);
+            //rp3.id = "3";
+            //rp3.title = "Hour Report";
+            //rp3.subtitle = "Please fill out what you have done in the provided time frame";
+            //rp3.input = "";
+            //reportPnaelView.Children.Add(rp3);
+            //total = reportPnaelView.Children.Count;
+
+
+        }
+
+        private void updateData(object sender, RoutedEventArgs e)
+        {
+            if (info_count.Content != null)
+            {
+                string infoCountText = info_count.Content.ToString();
+
+
+                string infoCountId = infoCountText.Split('/')[0];
+
+                foreach (var child in reportPnaelView.Children)
+                {
+                    if (child is report rp)
+                    {
+                        if (rp.id.Equals(infoCountId))
+                        {
+                            System.Diagnostics.Debug.WriteLine("ID found");
+                            System.Diagnostics.Debug.WriteLine("Updated");
+                            rp.input = info_input.Text;
+                        }
+                    }
+                }
+            }
+
+            bool checkMark = false;
+
+            foreach (var child in reportPnaelView.Children)
+            {
+                if (child is report rp)
+                {
+                    if (rp.input.Equals(""))
+                    {
+                       checkMark = true;
+                    }
+                }
+            }
+
+            if (!checkMark) {
+                completeReportBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                completeReportBtn.Visibility = Visibility.Hidden;
+            }
+
+        }
+
+        private  async void uploadBtn(object sender, RoutedEventArgs e)
+        {
+
+            completeReportBtn.Visibility = Visibility.Hidden;
+            attendencePane.Visibility = Visibility.Hidden;
+            attendencePaneDone.Visibility = Visibility.Visible;
+
+            Dictionary<string, string> additionalFormData = new Dictionary<string, string>();
+
+            int hourlyReportIndex = 0; // Index for hourly_report
+
+            foreach (var child in reportPnaelView.Children)
+            {
+                if (child is report rp)
+                {
+                    // Check if the ID is equal to 1
+                    if (rp.id == "1")
+                    {
+                        additionalFormData["daily_report"] = rp.input;
+                        System.Diagnostics.Debug.WriteLine("ID 1 found");
+                        System.Diagnostics.Debug.WriteLine("Updated");
+                    }
+                    else
+                    {
+                        // Construct the key for hourly_report
+                        string hourKey = $"hourly_report[{hourlyReportIndex}][hour]";
+                        string reportKey = $"hourly_report[{hourlyReportIndex}][report]";
+
+                        // Add the data to the dictionary
+                        additionalFormData[hourKey] = rp.id.ToString(); // Assuming rp.id is the hour value
+                        additionalFormData[reportKey] = rp.input;
+
+                        hourlyReportIndex++; // Increment the index for the next hourly report
+                    }
+                }
+            }
+
+            string response2 = await requestEngine.punchout(4,false , additionalFormData);
+            if (response2 == "true") { 
+                System.Diagnostics.Debug.WriteLine("Punch out success!"); 
+                attendencePaneDone.Visibility = Visibility.Hidden;
+                homePane.Visibility = Visibility.Visible;
+                Settings.IsEnabled = true;
+                information.IsEnabled = true;
+                logoutBtn.IsEnabled = true;
+                reportPnaelView.Children.Clear();
+            }
+            else { System.Diagnostics.Debug.WriteLine("Faild attempt to punch out !"); }
+
         }
     }
 }

@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="1400"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+
         WindowStyle="None" AllowsTransparency="True">
 
     <Window.Template>
@@ -92,9 +93,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}"
-                 BorderBrush="{TemplateBinding BorderBrush}"
-                 BorderThickness="{TemplateBinding BorderThickness}"
-                 RenderTransformOrigin="0.5,0.5">
+                     BorderBrush="{TemplateBinding BorderBrush}"
+                     BorderThickness="{TemplateBinding BorderThickness}"
+                     RenderTransformOrigin="0.5,0.5">
                             <Border.RenderTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1"/>
                             </Border.RenderTransform>
@@ -106,11 +107,11 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="border"
-                                              Storyboard.TargetProperty="RenderTransform.ScaleX"
-                                              To="0.9" Duration="0:0:0.2"/>
+                                                  Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                  To="0.9" Duration="0:0:0.2"/>
                                             <DoubleAnimation Storyboard.TargetName="border"
-                                              Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                              To="0.9" Duration="0:0:0.2"/>
+                                                  Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                  To="0.9" Duration="0:0:0.2"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
@@ -118,11 +119,11 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="border"
-                                              Storyboard.TargetProperty="RenderTransform.ScaleX"
-                                              To="1" Duration="0:0:0.1"/>
+                                                  Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                  To="1" Duration="0:0:0.1"/>
                                             <DoubleAnimation Storyboard.TargetName="border"
-                                              Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                              To="1" Duration="0:0:0.1"/>
+                                                  Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                  To="1" Duration="0:0:0.1"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
@@ -432,7 +433,7 @@
 
                 </Grid>
 
-                <Grid x:Name="homePane" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+                <Grid x:Name="homePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
                     <Button x:Name="play" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,670,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="playAction" Background="{x:Null}">
                         <Image x:Name="src1" Source="/view/play.png" RenderTransformOrigin="-4.281,2.969" />
@@ -442,15 +443,54 @@
                         <Image x:Name="src2" Source="/view/pause.png" RenderTransformOrigin="-4.281,2.969" />
                     </Button>
 
-                    <Button x:Name="stop" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,455,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="stopAction" Background="{x:Null}">
+                    <Button x:Name="stop" Visibility="Hidden" Style="{StaticResource btncutsomstylePlain}" HorizontalAlignment="Right" Margin="0,138,455,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="198" Height="178" Click="stopAction" Background="{x:Null}">
                         <Image x:Name="src3" Source="/view/stop.png" RenderTransformOrigin="-4.281,2.969" />
                     </Button>
 
-                    <Rectangle HorizontalAlignment="Left" Height="106" Margin="673,403,0,0" VerticalAlignment="Top" Width="2">
+                    <Grid x:Name="welcomeBox" Margin="641,124,89,264">
+                        <Label Content=" Welcome" HorizontalAlignment="Left" Margin="-11,29,0,0" VerticalAlignment="Top" Width="266" FontSize="48" RenderTransformOrigin="0.468,-0.1" FontWeight="Medium"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,103,0,0" TextWrapping="Wrap" Text="Track your tasks, review your progress, and stay on top of your daily goals. This dashboard gives you an overview of your assigned tasks, deadlines, and completed work. Keep your performance aligned with your targets and manage your workflow efficiently from here. Let’s get started!" VerticalAlignment="Top" Height="77" Width="446" FontWeight="Light"/>
+                        <Image HorizontalAlignment="Left" Height="100" Margin="214,-10,0,0" VerticalAlignment="Top" Width="100" Source="/view/waving-hand.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="11.36"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <!--<Rectangle HorizontalAlignment="Left" Height="206" VerticalAlignment="Center" Width="1" RenderTransformOrigin="0.5,0.5">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="Black" Opacity="0.298"/>
+                            </Rectangle.Fill>
+                        </Rectangle>-->
+
+                    </Grid>
+
+                    <Rectangle HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="1" RenderTransformOrigin="0.5,0.5" Margin="673,403,0,0">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
                         <Rectangle.Fill>
-                            <SolidColorBrush Color="Black" Opacity="0.6"/>
+                            <SolidColorBrush Color="Black" Opacity="0.298"/>
                         </Rectangle.Fill>
                     </Rectangle>
+
+
                     <Label Content="Taking Screenshots" HorizontalAlignment="Left" Margin="295,412,0,0" VerticalAlignment="Top" FontSize="36"/>
                     <Label x:Name="timerStatus" Content="Stopped" HorizontalAlignment="Left" Margin="402,464,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FF949494" Width="177" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
 
@@ -484,8 +524,163 @@
                VerticalAlignment="Top"
                FontWeight="Bold"
                HorizontalContentAlignment="Center" Margin="748,403,0,0"/>
+                    <Grid/>
 
                 </Grid>
+
+                <Grid x:Name="attendencePane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
+
+                    <ScrollViewer x:Name="reportView" Grid.Column="0" Margin="80,43,653,56" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="reportPnaelView" Width="573" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                    </ScrollViewer>
+
+                    <TextBox Visibility="Hidden" x:Name="info_input" HorizontalAlignment="Left" Margin="728,156,0,0" TextWrapping="Wrap" Text="Fill out this feild...."
+         VerticalAlignment="Top" Width="514" Height="337" Padding="10" Foreground="#FF797979">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="TextBox">
+                                            <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10">
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+
+                    <Button Visibility="Hidden" x:Name="info_updateBtn" Content="Update" Cursor="Hand" HorizontalAlignment="Left" Margin="1165,516,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="updateData">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <!-- Default Settings -->
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Removing Default Hover Effects -->
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                                <!-- ControlTemplate for Button with CornerRadius -->
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Hover Effects -->
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+
+
+                    <Button Visibility="Hidden" x:Name="info_clearBtn" Content="Clear" Cursor="Hand" HorizontalAlignment="Left" Margin="1099,516,0,0" VerticalAlignment="Top" Width="61" Height="25">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <!-- Default Settings -->
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Removing Default Hover Effects -->
+                                <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+                                <!-- ControlTemplate for Button with CornerRadius -->
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <!-- Hover Effects -->
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Label Visibility="Hidden"  x:Name="info_count" Content="4/14" HorizontalAlignment="Left" Margin="1068,31,0,0" VerticalAlignment="Top" FontSize="48" Height="80" Width="167" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                    <Label Visibility="Hidden" x:Name="info_title" Content="Attendence Report" HorizontalAlignment="Left" Margin="1058,96,0,0" VerticalAlignment="Top" Height="32" Width="172" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"/>
+                    <Label Visibility="Hidden" x:Name="info_subtitle" Content="Please fill out what you have done in the provided time frame" HorizontalAlignment="Left" Margin="880,123,0,0" VerticalAlignment="Top" Height="29" Width="350" VerticalContentAlignment="Center" HorizontalContentAlignment="Right">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="Black" Opacity="0.596"/>
+                        </Label.Foreground>
+                    </Label>
+                    <Grid x:Name="defaultInfo" Margin="653,43,59,53">
+                        <Image HorizontalAlignment="Center" Height="100" Margin="0,93,0,0" VerticalAlignment="Top" Width="100" Source="/view/select.png"/>
+                        <Label Content="Daily Work Report Submission" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="Gray"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,284,0,0" TextWrapping="Wrap" Text="Before you leave for the day, please take a moment to submit a brief summary of your completed tasks. This report will help us track daily progress and ensure smooth workflow management. Simply enter the details of your work into the form below, and click 'Complete' to finish your report for today." VerticalAlignment="Top" TextAlignment="Center" Width="392" Foreground="#FFC1C1C1"/>
+
+                    </Grid>
+
+
+
+
+                </Grid>
+
+                <Grid x:Name="attendencePaneDone" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306" Background="White">
+                    <Image Visibility="Visible" gif:ImageBehavior.AnimatedSource="/view/loading.gif" Grid.Column="0" Margin="533,177,533,177" Stretch="Fill" Source="/view/loading.gif">
+
+                    </Image>
+                    <Label Content="Updating..." HorizontalAlignment="Center" Margin="0,328,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.737,-0.308" Foreground="#FFA2A2A2"/>
+                </Grid>
+
 
                 <Grid x:Name="settingsPane" Visibility="Hidden" HorizontalAlignment="Center" Height="594" Margin="0,117,0,0" VerticalAlignment="Top" Width="1306">
 
@@ -501,7 +696,98 @@
 
                 </Grid>
 
+
+
             </Grid>
+
+
+            <!--complete button added-->
+            <Button x:Name="completeReportBtn"
+                Cursor="Hand"
+                Width="400"
+                Height="100"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                BorderBrush="{x:Null}"
+                Background="{x:Null}"
+                VerticalContentAlignment="Center"
+                Padding="0,0,0,0"
+                Margin="542,750,0,0"
+                Style="{StaticResource btncutsomstylePlain}"
+                Visibility="Hidden" Click="uploadBtn" 
+            >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!-- Button Background -->
+                            <Border x:Name="buttonBackground"
+                        CornerRadius="10"
+                        Padding="10,10,20,10"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        Margin="0,0,87,35"
+                        RenderTransformOrigin="0.5,0.5">
+                                <Border.Background>
+                                    <SolidColorBrush Color="#FF64CC5E" Opacity="1"/>
+                                </Border.Background>
+                                <!-- Grid for the button's content -->
+                                <Grid>
+                                    <!-- Left Bright Color Line -->
+                                    <Border Background="#FF88E882"
+                                Width="58"
+                                HorizontalAlignment="Left"
+                                CornerRadius="10,0,0,10"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                Margin="-10,-10,0,-10"/>
+
+                                    <!-- Icon and text container -->
+                                    <Grid>
+                                        <!-- Icon on the left side -->
+                                        <Image Source="/view/cursor-finger.png"
+                                   Width="25"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Height="25"
+                                   Margin="7,0,0,0"/>
+
+                                        <!-- Text on the right side -->
+                                        <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Margin="66,0,0,0">
+                                            <TextBlock Text="All Saved!"
+                                           Foreground="White"
+                                           FontSize="18"
+                                           FontWeight="Bold"/>
+                                            <TextBlock Text="Click here to Update your work Progress"
+                                           Foreground="White"
+                                           FontSize="10"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="buttonBackground" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="buttonBackground" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
 
             <!-- close button -->
             <Button x:Name="exitBtn" Style="{StaticResource MyButton}" Content="" HorizontalAlignment="Right" Margin="0,20,20,0" Cursor="Hand" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="32" Height="32" Click="exitEvent">
