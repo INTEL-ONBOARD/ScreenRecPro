@@ -182,6 +182,8 @@ namespace ScreenRecPro
             {
                 play.Visibility = Visibility.Hidden;
                 pause.Visibility = Visibility.Visible;
+                welcomeBox.Visibility = Visibility.Hidden;
+                stop.Visibility = Visibility.Visible;
                 timerStatus.Content = "Recording";
 
                 getRunnigProgramms();
@@ -276,7 +278,8 @@ namespace ScreenRecPro
                     addreport(this);
                     pauseCheck = false;
 
-
+                    welcomeBox.Visibility = Visibility.Visible;
+                    stop.Visibility = Visibility.Hidden;
                 }
                 else
                 {
@@ -284,6 +287,8 @@ namespace ScreenRecPro
                     homePane.Visibility = Visibility.Hidden;
                     addreport(this);
                     pauseCheck = false;
+                    welcomeBox.Visibility = Visibility.Visible;
+                    stop.Visibility = Visibility.Hidden;
                 }
 
                 BlinkingEllipse.Fill = new SolidColorBrush(Colors.Gray);
@@ -442,6 +447,15 @@ namespace ScreenRecPro
 
                 loginScreen.Visibility = Visibility.Visible;
                 welcomeScreen.Visibility = Visibility.Hidden;
+                welcomeBox.Visibility = Visibility.Visible;
+                stop.Visibility = Visibility.Hidden;
+
+                homePane.Visibility = Visibility.Visible;
+                infoPane.Visibility = Visibility.Hidden;
+                settingsPane.Visibility = Visibility.Hidden;
+                homeActive.Visibility = Visibility.Visible;
+                SettingsActive.Visibility = Visibility.Hidden;
+                infoActive.Visibility = Visibility.Hidden;
             }
             else
             {
