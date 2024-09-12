@@ -27,6 +27,7 @@
     <None Remove="view\select.png" />
     <None Remove="view\settings %283%29.png" />
     <None Remove="view\stop.png" />
+    <None Remove="view\waving-hand.png" />
     <None Remove="view\World-Map.png" />
   </ItemGroup>
 
@@ -56,6 +57,7 @@
     <Resource Include="view\select.png" />
     <Resource Include="view\settings (3).png" />
     <Resource Include="view\stop.png" />
+    <Resource Include="view\waving-hand.png" />
     <Resource Include="view\World-Map.png" />
   </ItemGroup>
 

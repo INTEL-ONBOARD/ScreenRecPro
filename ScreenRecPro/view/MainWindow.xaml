@@ -447,10 +447,20 @@
                         <Image x:Name="src3" Source="/view/stop.png" RenderTransformOrigin="-4.281,2.969" />
                     </Button>
 
-                    <Grid x:Name="welcomeBox" Margin="673,124,115,264">
-                        <Label Content=" Welcome" HorizontalAlignment="Left" Margin="35,29,0,0" VerticalAlignment="Top" Width="266" FontSize="48" RenderTransformOrigin="0.468,-0.1" FontWeight="Medium"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="56,103,0,0" TextWrapping="Wrap" Text="Track your tasks, review your progress, and stay on top of your daily goals. This dashboard gives you an overview of your assigned tasks, deadlines, and completed work. Keep your performance aligned with your targets and manage your workflow efficiently from here. Let’s get started!" VerticalAlignment="Top" Height="77" Width="446" FontWeight="Light"/>
-                        <Rectangle HorizontalAlignment="Left" Height="206" VerticalAlignment="Center" Width="1" RenderTransformOrigin="0.5,0.5">
+                    <Grid x:Name="welcomeBox" Margin="641,124,89,264">
+                        <Label Content=" Welcome" HorizontalAlignment="Left" Margin="-11,29,0,0" VerticalAlignment="Top" Width="266" FontSize="48" RenderTransformOrigin="0.468,-0.1" FontWeight="Medium"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,103,0,0" TextWrapping="Wrap" Text="Track your tasks, review your progress, and stay on top of your daily goals. This dashboard gives you an overview of your assigned tasks, deadlines, and completed work. Keep your performance aligned with your targets and manage your workflow efficiently from here. Let’s get started!" VerticalAlignment="Top" Height="77" Width="446" FontWeight="Light"/>
+                        <Image HorizontalAlignment="Left" Height="100" Margin="214,-10,0,0" VerticalAlignment="Top" Width="100" Source="/view/waving-hand.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="11.36"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <!--<Rectangle HorizontalAlignment="Left" Height="206" VerticalAlignment="Center" Width="1" RenderTransformOrigin="0.5,0.5">
                             <Rectangle.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="-1"/>
@@ -462,7 +472,8 @@
                             <Rectangle.Fill>
                                 <SolidColorBrush Color="Black" Opacity="0.298"/>
                             </Rectangle.Fill>
-                        </Rectangle>
+                        </Rectangle>-->
+
                     </Grid>
 
                     <Rectangle HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="1" RenderTransformOrigin="0.5,0.5" Margin="673,403,0,0">
