@@ -324,7 +324,7 @@ namespace ScreenRecPro
 
         }
 
-        private async void StartScreenshotProcess(bool initialState)
+        private async void StartScreenshotProcess(bool initialState)D
         {
             isScreenshotActive = initialState;
             Random random = new Random();
